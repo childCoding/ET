@@ -53,14 +53,13 @@ namespace ETHotfix
 				
 				G2C_LoginGate g2CLoginGate = (G2C_LoginGate)await SessionComponent.Instance.Session.Call(new C2G_LoginGate() { Key = r2CLogin.Key });
 
-				Log.Info("登陆gate成功!");
-
+				Log.Info($"登陆gate成功!玩家编号{g2CLoginGate.PlayerId}");
 				// 创建Player
 				Player player = ETModel.ComponentFactory.CreateWithId<Player>(g2CLoginGate.PlayerId);
 				PlayerComponent playerComponent = ETModel.Game.Scene.GetComponent<PlayerComponent>();
-				playerComponent.MyPlayer = player;
+                playerComponent.MyPlayer = player;
 
-				Game.Scene.GetComponent<UIComponent>().Create(UIType.UILobby);
+                Game.Scene.GetComponent<UIComponent>().Create(UIType.UILobby);
 				Game.Scene.GetComponent<UIComponent>().Remove(UIType.UILogin);
 			}
 			catch (Exception e)

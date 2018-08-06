@@ -10,6 +10,8 @@ namespace ETModel
 	
 	public sealed class Unit: Entity
 	{
+        public long PlayerId { get; set; }
+
 		public VInt3 IntPos;
 
 		public GameObject GameObject;

@@ -636,6 +636,14 @@ namespace ETModel {
       }
     }
 
+    private long playerId_;
+    public long PlayerId {
+      get { return playerId_; }
+      set {
+        playerId_ = value;
+      }
+    }
+
     private int x_;
     public int X {
       get { return x_; }
@@ -657,12 +665,16 @@ namespace ETModel {
         output.WriteRawTag(8);
         output.WriteInt64(UnitId);
       }
-      if (X != 0) {
+      if (PlayerId != 0L) {
         output.WriteRawTag(16);
+        output.WriteInt64(PlayerId);
+      }
+      if (X != 0) {
+        output.WriteRawTag(24);
         output.WriteInt32(X);
       }
       if (Z != 0) {
-        output.WriteRawTag(24);
+        output.WriteRawTag(32);
         output.WriteInt32(Z);
       }
     }
@@ -671,6 +683,9 @@ namespace ETModel {
       int size = 0;
       if (UnitId != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(UnitId);
+      }
+      if (PlayerId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(PlayerId);
       }
       if (X != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(X);
@@ -683,6 +698,7 @@ namespace ETModel {
 
     public void MergeFrom(pb::CodedInputStream input) {
       unitId_ = 0;
+      playerId_ = 0;
       x_ = 0;
       z_ = 0;
       uint tag;
@@ -696,10 +712,14 @@ namespace ETModel {
             break;
           }
           case 16: {
-            X = input.ReadInt32();
+            PlayerId = input.ReadInt64();
             break;
           }
           case 24: {
+            X = input.ReadInt32();
+            break;
+          }
+          case 32: {
             Z = input.ReadInt32();
             break;
           }

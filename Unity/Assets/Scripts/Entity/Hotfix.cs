@@ -19,7 +19,8 @@ namespace ETModel
 
 		public Action Update;
 		public Action LateUpdate;
-		public Action OnApplicationQuit;
+
+        public Action OnApplicationQuit;
 
 		public Hotfix()
 		{

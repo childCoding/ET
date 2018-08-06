@@ -3,11 +3,11 @@
 namespace ETModel
 {
 	[ObjectSystem]
-	public class CameraComponentAwakeSystem : AwakeSystem<CameraComponent>
+	public class CameraComponentAwakeSystem : AwakeSystem<CameraComponent, Unit>
 	{
-		public override void Awake(CameraComponent self)
+		public override void Awake(CameraComponent self, Unit unit)
 		{
-			self.Awake();
+			self.Awake(unit);
 		}
 	}
 
@@ -25,7 +25,7 @@ namespace ETModel
 		// 战斗摄像机
 		public Camera mainCamera;
 
-		public Unit Unit;
+        public Unit Unit;
 
 		public Camera MainCamera
 		{
@@ -35,10 +35,11 @@ namespace ETModel
 			}
 		}
 
-		public void Awake()
+		public void Awake(Unit unit)
 		{
 			this.mainCamera = Camera.main;
-		}
+            this.Unit = unit;
+        }
 
 		public void LateUpdate()
 		{
@@ -50,6 +51,6 @@ namespace ETModel
 		{
 			Vector3 cameraPos = this.mainCamera.transform.position;
 			this.mainCamera.transform.position = new Vector3(this.Unit.Position.x, cameraPos.y, this.Unit.Position.z - 1);
-		}
+        }
 	}
 }

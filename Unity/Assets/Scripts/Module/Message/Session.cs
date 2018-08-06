@@ -58,7 +58,7 @@ namespace ETModel
 			channel.ReadCallback += this.OnRead;
 			
 			this.channel.Start();
-		}
+        }
 		public override void Dispose()
 		{
 			if (this.IsDisposed)

@@ -21,7 +21,7 @@ namespace ETModel
 	public sealed class Unit: Entity
 	{
 		public UnitType UnitType { get; private set; }
-		
+		public long PlayerId { get; set; }
 		[BsonIgnore]
 		public Vector3 Position { get; set; }
 		
@@ -36,7 +36,6 @@ namespace ETModel
 			{
 				return;
 			}
-
 			base.Dispose();
 		}
 	}

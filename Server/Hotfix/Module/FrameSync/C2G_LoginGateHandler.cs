@@ -23,7 +23,6 @@ namespace ETHotfix
 				Game.Scene.GetComponent<PlayerComponent>().Add(player);
 				session.AddComponent<SessionPlayerComponent>().Player = player;
 				session.AddComponent<MailBoxComponent, string>(ActorType.GateSession);
-
 				response.PlayerId = player.Id;
 				reply(response);
 
