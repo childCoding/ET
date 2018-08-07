@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Threading;
 using System.Threading.Tasks;
-using UnityEngine;
 using UnityEngine.Networking;
 
 namespace ETModel
 {
-	[ObjectSystem]
+    [ObjectSystem]
 	public class UnityWebRequestUpdateSystem : UpdateSystem<UnityWebRequestAsync>
 	{
 		public override void Update(UnityWebRequestAsync self)

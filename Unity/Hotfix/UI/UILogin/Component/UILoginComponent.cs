@@ -23,10 +23,10 @@ namespace ETHotfix
 		public void Awake()
 		{
 			ReferenceCollector rc = this.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
-			loginBtn = rc.Get<GameObject>("LoginBtn");
+            loginBtn = rc.Get<GameObject>("LoginBtn");
 			loginBtn.GetComponent<Button>().onClick.Add(OnLogin);
 			this.account = rc.Get<GameObject>("Account");
-		}
+        }
 
 		public async void OnLogin()
 		{
@@ -60,7 +60,7 @@ namespace ETHotfix
                 playerComponent.MyPlayer = player;
 
                 Game.Scene.GetComponent<UIComponent>().Create(UIType.UILobby);
-				Game.Scene.GetComponent<UIComponent>().Remove(UIType.UILogin);
+                Game.Scene.GetComponent<UIComponent>().Remove(UIType.UILogin);
 			}
 			catch (Exception e)
 			{

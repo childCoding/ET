@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace ETHotfix
 {
-    [UIFactory(UIType.UILogin)]
-    public class UILoginFactory : IUIFactory
+    [UIFactory(UIType.UIOperation)]
+    public class UIOperationFactory : IUIFactory
     {
         public UI Create(Scene scene, string type, GameObject gameObject)
         {
@@ -14,10 +14,10 @@ namespace ETHotfix
 				ResourcesComponent resourcesComponent = ETModel.Game.Scene.GetComponent<ResourcesComponent>();
 				resourcesComponent.LoadBundle($"{type}.unity3d");
 				GameObject bundleGameObject = (GameObject)resourcesComponent.GetAsset($"{type}.unity3d", $"{type}");
-				GameObject login = UnityEngine.Object.Instantiate(bundleGameObject);
-				login.layer = LayerMask.NameToLayer(LayerNames.UI);
-		        UI ui = ComponentFactory.Create<UI, GameObject>(login);
-                ui.AddComponent<UILoginComponent>();
+				GameObject operation = UnityEngine.Object.Instantiate(bundleGameObject);
+                operation.layer = LayerMask.NameToLayer(LayerNames.UI);
+		        UI ui = ComponentFactory.Create<UI, GameObject>(operation);
+                ui.AddComponent<UIOperationComponent>();
                 return ui;
 	        }
 	        catch (Exception e)

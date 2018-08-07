@@ -49,8 +49,13 @@ namespace ETModel
 
 		private void UpdatePosition()
 		{
-			Vector3 cameraPos = this.mainCamera.transform.position;
-			this.mainCamera.transform.position = new Vector3(this.Unit.Position.x, cameraPos.y, this.Unit.Position.z - 1);
+            this.mainCamera.transform.position = new Vector3(this.Unit.Position.x, (float)0.5, (float)(this.Unit.Position.z - 0.3));
+        }
+
+        // 摄像机旋转
+        public void UpdateRotation(Vector3 vector)
+        {
+            //this.mainCamera.transform.Rotate(vector.y, vector.x, 0);
         }
 	}
 }

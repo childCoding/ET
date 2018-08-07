@@ -26,7 +26,7 @@ public class ReferenceCollector: MonoBehaviour, ISerializationCallbackReceiver
 {
 	public List<ReferenceCollectorData> data = new List<ReferenceCollectorData>();
 
-	private readonly Dictionary<string, Object> dict = new Dictionary<string, Object>();
+    private readonly Dictionary<string, Object> dict = new Dictionary<string, Object>();
 
 #if UNITY_EDITOR
 	public void Add(string key, Object obj)

@@ -28,7 +28,7 @@ namespace ETHotfix
 
 	    public int mapMask;
 
-	    public void Awake()
+        public void Awake()
 	    {
 		    this.mapMask = LayerMask.GetMask("Map");
 	    }
@@ -43,11 +43,19 @@ namespace ETHotfix
 	            {
 					this.ClickPoint = hit.point;
 		            ETModel.SessionComponent.Instance.Session.Send(new Frame_ClickMap() { X = (int)(this.ClickPoint.x * 1000), Z = (int)(this.ClickPoint.z * 1000) });
-
-					// 测试actor rpc消息
-					this.TestActor();
+                    // 测试actor rpc消息
+                    this.TestActor();
 				}
             }
+            else if (Input.GetMouseButtonDown(0))
+            {
+                this.ClickPoint = Input.mousePosition;
+            }// 左键按下
+            else if (Input.GetMouseButton(0))
+            {
+                Vector3 rotation = Input.mousePosition - this.ClickPoint;
+                ETModel.Game.Scene.GetComponent<CameraComponent>().UpdateRotation(rotation.normalized);
+            }// 左键拖动
         }
 
 	    public async void TestActor()
