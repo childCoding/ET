@@ -54,7 +54,7 @@ namespace ETHotfix
             else if (Input.GetMouseButton(0))
             {
                 Vector3 rotation = Input.mousePosition - this.ClickPoint;
-                ETModel.Game.Scene.GetComponent<CameraComponent>().UpdateRotation(rotation.normalized);
+                ETModel.Game.Scene.GetComponent<CameraComponent>().UpdateRotation(rotation);
             }// 左键拖动
         }
 
