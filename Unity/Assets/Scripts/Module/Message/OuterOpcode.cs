@@ -67,6 +67,14 @@ namespace ETModel
 	[Message(OuterOpcode.Actor_MatchInformation)]
 	public partial class Actor_MatchInformation : IActorMessage {}
 
+// 吐积分
+	[Message(OuterOpcode.Frame_SpitScore)]
+	public partial class Frame_SpitScore : IFrameMessage {}
+
+// 冲刺技能
+	[Message(OuterOpcode.Frame_Sprint)]
+	public partial class Frame_Sprint : IFrameMessage {}
+
 }
 namespace ETModel
 {
@@ -93,5 +101,7 @@ namespace ETModel
 		 public const ushort Actor_CreateItems = 119;
 		 public const ushort Actor_RemoveItems = 120;
 		 public const ushort Actor_MatchInformation = 121;
+		 public const ushort Frame_SpitScore = 121;
+		 public const ushort Frame_Sprint = 122;
 	}
 }

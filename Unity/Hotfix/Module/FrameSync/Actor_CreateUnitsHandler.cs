@@ -1,5 +1,5 @@
-﻿using ETModel;
-using UnityEngine;
+﻿using UnityEngine;
+using ETModel;
 
 namespace ETHotfix
 {
@@ -19,7 +19,7 @@ namespace ETHotfix
                 {
                     continue;
                 }
-                Unit unit = UnitFactory.Create(unitInfo.UnitId);
+                Unit unit = UnitFactory.Create(unitInfo.UnitId, (UnitType)unitInfo.Type);
                 unit.PlayerId = unitInfo.PlayerId;
                 unit.Position = new Vector3(unitInfo.X / 1000f, 0, unitInfo.Z / 1000f);
                 unit.IntPos = new VInt3(unitInfo.X, 0, unitInfo.Z);

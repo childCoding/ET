@@ -11,7 +11,7 @@ namespace ETHotfix
             M2G_CreateUnit response = new M2G_CreateUnit();
             try
             {
-                Unit unit = ComponentFactory.Create<Unit,UnitType>(UnitType.Strong);
+                Unit unit = ComponentFactory.Create<Unit,UnitType>(UnitType.Weak);
                 unit.PlayerId = message.PlayerId;
                 await unit.AddComponent<MailBoxComponent>().AddLocation();
                 unit.AddComponent<UnitGateComponent, long>(message.GateSessionId);
@@ -24,7 +24,7 @@ namespace ETHotfix
                 Unit[] units = Game.Scene.GetComponent<UnitComponent>().GetAll();
                 foreach (Unit u in units)
                 {
-                    actorCreateUnits.Units.Add(new UnitInfo() { UnitId = u.Id, PlayerId = u.PlayerId, X = (int)(u.Position.X * 1000), Z = (int)(u.Position.Z * 1000) });
+                    actorCreateUnits.Units.Add(new UnitInfo() { UnitId = u.Id, PlayerId = u.PlayerId, Type = (int)unit.UnitType, X = (int)(u.Position.X * 1000), Z = (int)(u.Position.Z * 1000) });
                 }
                 MessageHelper.Broadcast(actorCreateUnits);
             }

@@ -666,6 +666,14 @@ namespace ETModel {
       }
     }
 
+    private int type_;
+    public int Type {
+      get { return type_; }
+      set {
+        type_ = value;
+      }
+    }
+
     private int x_;
     public int X {
       get { return x_; }
@@ -691,12 +699,16 @@ namespace ETModel {
         output.WriteRawTag(16);
         output.WriteInt64(PlayerId);
       }
-      if (X != 0) {
+      if (Type != 0) {
         output.WriteRawTag(24);
+        output.WriteInt32(Type);
+      }
+      if (X != 0) {
+        output.WriteRawTag(32);
         output.WriteInt32(X);
       }
       if (Z != 0) {
-        output.WriteRawTag(32);
+        output.WriteRawTag(40);
         output.WriteInt32(Z);
       }
     }
@@ -708,6 +720,9 @@ namespace ETModel {
       }
       if (PlayerId != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(PlayerId);
+      }
+      if (Type != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Type);
       }
       if (X != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(X);
@@ -721,6 +736,7 @@ namespace ETModel {
     public void MergeFrom(pb::CodedInputStream input) {
       unitId_ = 0;
       playerId_ = 0;
+      type_ = 0;
       x_ = 0;
       z_ = 0;
       uint tag;
@@ -738,10 +754,14 @@ namespace ETModel {
             break;
           }
           case 24: {
-            X = input.ReadInt32();
+            Type = input.ReadInt32();
             break;
           }
           case 32: {
+            X = input.ReadInt32();
+            break;
+          }
+          case 40: {
             Z = input.ReadInt32();
             break;
           }
@@ -1948,6 +1968,164 @@ namespace ETModel {
           }
           case 744: {
             ActorId = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  /// 吐积分
+  /// </summary>
+  public partial class Frame_SpitScore : pb::IMessage {
+    private static readonly pb::MessageParser<Frame_SpitScore> _parser = new pb::MessageParser<Frame_SpitScore>(() => new Frame_SpitScore());
+    public static pb::MessageParser<Frame_SpitScore> Parser { get { return _parser; } }
+
+    private int rpcId_;
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    private long id_;
+    public long Id {
+      get { return id_; }
+      set {
+        id_ = value;
+      }
+    }
+
+    private global::ETModel.vector3 position_;
+    public global::ETModel.vector3 Position {
+      get { return position_; }
+      set {
+        position_ = value;
+      }
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (position_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(Position);
+      }
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (Id != 0L) {
+        output.WriteRawTag(240, 5);
+        output.WriteInt64(Id);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (Id != 0L) {
+        size += 2 + pb::CodedOutputStream.ComputeInt64Size(Id);
+      }
+      if (position_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Position);
+      }
+      return size;
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      rpcId_ = 0;
+      id_ = 0;
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            if (position_ == null) {
+              position_ = new global::ETModel.vector3();
+            }
+            input.ReadMessage(position_);
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+          case 752: {
+            Id = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  /// 冲刺技能
+  /// </summary>
+  public partial class Frame_Sprint : pb::IMessage {
+    private static readonly pb::MessageParser<Frame_Sprint> _parser = new pb::MessageParser<Frame_Sprint>(() => new Frame_Sprint());
+    public static pb::MessageParser<Frame_Sprint> Parser { get { return _parser; } }
+
+    private int rpcId_;
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    private long id_;
+    public long Id {
+      get { return id_; }
+      set {
+        id_ = value;
+      }
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (Id != 0L) {
+        output.WriteRawTag(240, 5);
+        output.WriteInt64(Id);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (Id != 0L) {
+        size += 2 + pb::CodedOutputStream.ComputeInt64Size(Id);
+      }
+      return size;
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      rpcId_ = 0;
+      id_ = 0;
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+          case 752: {
+            Id = input.ReadInt64();
             break;
           }
         }

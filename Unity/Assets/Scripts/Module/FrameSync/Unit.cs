@@ -4,9 +4,9 @@ namespace ETModel
 {
 	public enum UnitType
 	{
-		Hero,
-		Npc
-	}
+        Weak,
+        Strong
+    }
 	
 	public sealed class Unit: Entity
 	{
@@ -17,9 +17,12 @@ namespace ETModel
 		public GameObject GameObject;
         // 积分
         public int Score { get; set; }
+        // 类型
+        public UnitType UnitType { get; set; }
 		
-		public void Awake()
+		public void Awake(UnitType unitType)
 		{
+            this.UnitType = unitType;
 		}
 
 		public Vector3 Position

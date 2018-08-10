@@ -49,7 +49,7 @@ namespace ETModel
 
 		private void UpdatePosition()
 		{
-            this.mainCamera.transform.position = new Vector3(this.Unit.Position.x, (float)0.5, (float)(this.Unit.Position.z - 0.3));
+            this.mainCamera.transform.position = new Vector3(this.Unit.Position.x, (float)2, (float)(this.Unit.Position.z - 1.5));
         }
 
         // 摄像机旋转
