@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 public class FixedJoystick : Joystick
 {
     Vector2 joystickPosition = Vector2.zero;
-
+    public Vector2 JoystickDir = Vector2.zero;
     void Start()
     {
         GameObject gameObject = GameObject.Find("UICamera");
@@ -21,7 +21,7 @@ public class FixedJoystick : Joystick
         handle.anchoredPosition = (inputVector * background.sizeDelta.x / 2f) * handleLimit;
         Unit unit = Game.Scene.GetComponent<UnitComponent>().Get(PlayerComponent.Instance.MyPlayer.UnitId);
         Vector3 moveVector = (unit.Position + Vector3.right * this.Horizontal + Vector3.forward * this.Vertical) * 1000;
-        SessionComponent.Instance.Session.Send(new Frame_ClickMap() { X = (int)moveVector.x, Z = (int)moveVector.z });
+        //SessionComponent.Instance.Session.Send(new Frame_ClickMap() { X = (int)moveVector.x, Z = (int)moveVector.z });
     }
 
     public override void OnPointerDown(PointerEventData eventData)

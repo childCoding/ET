@@ -21,6 +21,7 @@
     <None Remove="Other\**" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\Unity\Assets\Scripts\Module\Message\Common.cs" Link="Module\Message\Common.cs" />
     <Compile Include="..\..\Unity\Assets\Scripts\Module\Message\OuterMessage.cs" Link="Module\Message\OuterMessage.cs" />
     <Compile Include="..\..\Unity\Assets\Scripts\Module\Message\OuterOpcode.cs" Link="Module\Message\OuterOpcode.cs" />
     <Compile Include="..\..\Unity\Hotfix\Module\Message\HotfixMessage.cs" Link="Module\Message\HotfixMessage.cs" />

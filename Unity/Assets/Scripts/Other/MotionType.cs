@@ -5,5 +5,10 @@
 		None,
 		Idle,
 		Run,
+        Attack,
+        Damage,
+        Death,
+        Skill,
+        Knockback,
 	}
 }

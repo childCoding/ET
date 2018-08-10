@@ -1,11 +1,14 @@
 syntax = "proto3";
 package ETModel;
 
+import "Common.proto";
+
 message Actor_Test // IActorMessage
 {
 	int32 RpcId = 90;
 	int64 ActorId = 93;
 	string Info = 1;
+	vector3 vec = 2;
 }
 
 message Actor_TestRequest // IActorRequest

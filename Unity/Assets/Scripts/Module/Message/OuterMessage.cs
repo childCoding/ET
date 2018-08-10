@@ -37,10 +37,22 @@ namespace ETModel {
       }
     }
 
+    private global::ETModel.vector3 vec_;
+    public global::ETModel.vector3 Vec {
+      get { return vec_; }
+      set {
+        vec_ = value;
+      }
+    }
+
     public void WriteTo(pb::CodedOutputStream output) {
       if (Info.Length != 0) {
         output.WriteRawTag(10);
         output.WriteString(Info);
+      }
+      if (vec_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(Vec);
       }
       if (RpcId != 0) {
         output.WriteRawTag(208, 5);
@@ -63,6 +75,9 @@ namespace ETModel {
       if (Info.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Info);
       }
+      if (vec_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Vec);
+      }
       return size;
     }
 
@@ -78,6 +93,13 @@ namespace ETModel {
             break;
           case 10: {
             Info = input.ReadString();
+            break;
+          }
+          case 18: {
+            if (vec_ == null) {
+              vec_ = new global::ETModel.vector3();
+            }
+            input.ReadMessage(vec_);
             break;
           }
           case 720: {

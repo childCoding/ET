@@ -368,7 +368,7 @@ namespace ETHotfix
 		public string Message { get; set; }
 
 		public long UnitId { get; set; }
-        
+
 		public int Count { get; set; }
 
 	}
