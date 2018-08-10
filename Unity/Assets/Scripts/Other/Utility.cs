@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UnityEngine;
 
 namespace ETModel
 {
@@ -19,6 +15,18 @@ namespace ETModel
             v.Y = V.y;
             v.Z = V.z;
             return v;
+        }
+        static public Transform SearchChildRecurvese(Transform t, string name)
+        {
+            if (t.name == name)
+                return t;
+            int count = t.childCount;
+            for (int i = 0; i < count; i++)
+            {
+                var child = SearchChildRecurvese(t.GetChild(i), name);
+                if (child) return child;
+            }
+            return null;
         }
     }
 }

@@ -49,13 +49,35 @@ namespace ETModel
 
 		private void UpdatePosition()
 		{
-            this.mainCamera.transform.position = new Vector3(this.Unit.Position.x, (float)2, (float)(this.Unit.Position.z - 1.5));
-        }
+            var dir = Quaternion.Euler( m_y,m_x, 0) * Vector3.forward;
+            dir *= m_disttance;
+            this.mainCamera.transform.position = Unit.Position + dir;
 
+            //var pos = Unit.Transform.position - this.Unit.Transform.forward * 0.5f + this.Unit.Transform.up * 0.2f;
+            //this.mainCamera.transform.position = pos;
+            this.mainCamera.transform.LookAt(Unit.Position);
+        }
+        private float m_x = -45;
+        private float m_y = -60;
+        private float m_disttance = 2f;
         // 摄像机旋转
-        public void UpdateRotation(Vector3 vector)
+        public void UpdateRotation(Vector3 v)
         {
+            m_y += v.y;
+            m_y = ClampAngle(m_y, -85, 85); ;
+
+            m_x += v.x;
+            m_x = ClampAngle(m_x, -360, 360); ;
+            //Log.Debug($"{m_y} {m_x} {v}");
             //this.mainCamera.transform.Rotate(vector.y, vector.x, 0);
         }
-	}
+
+        private float ClampAngle(float angle, float min, float max)
+        {
+            if (angle < -360) angle += 360;
+            if (angle > 360) angle -= 360;
+            return Mathf.Clamp(angle, min, max);
+        }
+
+    }
 }

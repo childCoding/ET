@@ -8,6 +8,7 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointer
     public JoystickMode joystickMode = JoystickMode.AllAxis;
 
     protected Vector2 inputVector = Vector2.zero;
+    //protected Vector3 Vector = Vector2.zero;
 
     [Header("Components")]
     public RectTransform background;
@@ -15,7 +16,7 @@ public class Joystick : MonoBehaviour, IDragHandler, IPointerUpHandler, IPointer
 
     public float Horizontal { get { return inputVector.x; } }
     public float Vertical { get { return inputVector.y; } }
-    public Vector2 Direction { get { return new Vector2(Horizontal, Vertical); } }
+    public Vector3 WorldDirection = Vector3.zero; //{ get { return new Vector2(Horizontal, Vertical); } }
 
     public virtual void OnDrag(PointerEventData eventData)
     {

@@ -101,7 +101,7 @@ namespace ETModel
 		 public const ushort Actor_CreateItems = 119;
 		 public const ushort Actor_RemoveItems = 120;
 		 public const ushort Actor_MatchInformation = 121;
-		 public const ushort Frame_SpitScore = 121;
-		 public const ushort Frame_Sprint = 122;
+		 public const ushort Frame_SpitScore = 122;
+		 public const ushort Frame_Sprint = 123;
 	}
 }

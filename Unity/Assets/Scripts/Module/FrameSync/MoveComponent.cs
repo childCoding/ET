@@ -39,7 +39,10 @@ namespace ETModel
 
 	public class MoveComponent : Component
 	{
+        private enum State { Moving ,Idle,ByDrag, ByCasting }
+        private State UnitState = State.Idle;
 		private AnimatorComponent animatorComponent;
+        private CharacterController characterComponent;
 
 		public long mainSpeed;
 		public Dictionary<long, Speed> speeds = new Dictionary<long, Speed>();
@@ -95,10 +98,12 @@ namespace ETModel
 		}
 
 		public void Awake()
-		{
+		{ 
 			this.mainSpeed = this.AddSpeed(new Vector3());
 			this.animatorComponent = this.Entity.GetComponent<AnimatorComponent>();
-		}
+            this.characterComponent = this.GetParent<Unit>().GameObject.GetComponent<CharacterController>();
+
+        }
 
 		public void Update()
 		{
@@ -127,11 +132,17 @@ namespace ETModel
 					return;
 				}
 			}
+            if (!characterComponent.isGrounded)
+            {
+                moveVector3.y += -0.5f;
+            }
+            //unit.Position = unit.Position + moveVector3;
+            characterComponent.Move(moveVector3);
 
-			unit.Position = unit.Position + moveVector3;
-		}
 
-		private void UpdateTurn()
+        }
+        #region 移动
+        private void UpdateTurn()
 		{
 			//Log.Debug($"update turn: {this.t} {this.TurnTime}");
 			if (this.t > this.TurnTime)
@@ -158,14 +169,17 @@ namespace ETModel
 			speed = speed.normalized * speedValue;
 			this.MainSpeed = speed;
 			this.Dest = dest;
-		}
+
+            UnitState = State.Moving;
+        }
 
 		public void MoveToDir(Vector3 dir)
 		{
 			this.IsArrived = false;
 			this.hasDest = false;
 			this.MainSpeed = dir;
-		}
+            UnitState = State.Moving;
+        }
 
 		public long AddSpeed(Vector3 spd)
 		{
@@ -199,7 +213,8 @@ namespace ETModel
 			this.speeds.Clear();
 			this.animatorComponent?.SetFloatValue("Speed", 0);
             //this.animatorComponent?.Play(MotionType.Idle);
-		}
+            UnitState = State.Idle;
+        }
 
 		/// <summary>
 		/// 改变Unit的朝向
@@ -276,5 +291,26 @@ namespace ETModel
 			}
 			base.Dispose();
 		}
-	}
+#endregion
+
+
+        #region 技能
+        /// <summary>
+        /// 拾取对象
+        /// </summary>
+        /// <param name="u"></param>
+        public void Drag(Unit other)
+        {
+            Unit unit = this.GetParent<Unit>();
+            if (unit != other && other != null)
+            {
+                var leftweapone = unit.GetComponent<BoneComponent>().TLeftWeapon;
+                other.GameObject.transform.SetParent(leftweapone);
+                other.GameObject.transform.localPosition = Vector3.zero;
+            }
+        }
+        //private 
+        public bool IsByDrag { get { return UnitState == State.ByDrag; } }
+        #endregion
+    }
 }

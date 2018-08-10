@@ -24,8 +24,12 @@ namespace ETModel
 		{
             this.UnitType = unitType;
 		}
+        public Transform Transform {
+            get { return GameObject.transform; }
+            private set {}
+        }
 
-		public Vector3 Position
+        public Vector3 Position
 		{
 			get
 			{

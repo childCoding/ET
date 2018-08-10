@@ -52,6 +52,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
-  - key: Skeleton
+  - key: Weak
     gameObject: {fileID: 1095546210275710, guid: 534aa54081aeefe43ae01a61747d15c6,
       type: 2}
+  - key: Hero
+    gameObject: {fileID: 100090, guid: 519297968589a344097af59e322c710a, type: 3}

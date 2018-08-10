@@ -25,6 +25,7 @@ namespace ETHotfix
 	public class OperaComponent: Component
     {
         public Vector3 ClickPoint;
+        public Vector3 LastClickPoint;
 
 	    public int mapMask;
 
@@ -37,25 +38,37 @@ namespace ETHotfix
         {
             if (Input.GetMouseButtonDown(1))
             {
+                this.ClickPoint = Input.mousePosition;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
 	            if (Physics.Raycast(ray, out hit, 1000, this.mapMask))
 	            {
-					this.ClickPoint = hit.point;
-		            ETModel.SessionComponent.Instance.Session.Send(new Frame_ClickMap() { X = (int)(this.ClickPoint.x * 1000), Z = (int)(this.ClickPoint.z * 1000) });
+					//this.ClickPoint = hit.point;
+		            //ETModel.SessionComponent.Instance.Session.Send(new Frame_ClickMap() { X = (int)(this.ClickPoint.x * 1000), Z = (int)(this.ClickPoint.z * 1000) });
                     // 测试actor rpc消息
-                    this.TestActor();
+                    //this.TestActor();
 				}
             }
-            else if (Input.GetMouseButtonDown(0))
+
+            if (Input.GetMouseButtonDown(1))
             {
+                LastClickPoint = Input.mousePosition;
                 this.ClickPoint = Input.mousePosition;
             }// 左键按下
-            else if (Input.GetMouseButton(0))
+            else if (Input.GetMouseButton(1))
             {
-                Vector3 rotation = Input.mousePosition - this.ClickPoint;
+                
+                Vector3 rotation = (Input.mousePosition - this.LastClickPoint) / 10;
                 ETModel.Game.Scene.GetComponent<CameraComponent>().UpdateRotation(rotation);
+                LastClickPoint = Input.mousePosition;
             }// 左键拖动
+
+            if(Input.touchCount == 1)
+            {
+                Vector2 pos = Input.touches[0].deltaPosition / 10; ;
+                Vector3 rotation = new Vector3(pos.x, pos.y, 0);
+                ETModel.Game.Scene.GetComponent<CameraComponent>().UpdateRotation(rotation);
+            }
         }
 
 	    public async void TestActor()

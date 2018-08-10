@@ -26,7 +26,9 @@ namespace ETHotfix
     public class UIOperationComponent : Component
     {
         private Joystick joystick = null;
-        public Unit Unit = null;
+        private Unit Unit = null;
+        private MoveComponent MoveC = null;
+
         public void Awake()
         {
             ReferenceCollector rc = this.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
@@ -39,16 +41,25 @@ namespace ETHotfix
             joystick = rc.Get<GameObject>("Joystick").GetComponent<Joystick>();
             //unit = ETModel.Game.Scene.GetComponent<UnitComponent>().Get(UnitComponent.Instance.MyUnit.Id);
         }
+        public void SetUnit(Unit u)
+        {
+            Unit = u;
+            MoveC = Unit.GetComponent<MoveComponent>();
+        }
         private bool IsStop = true;
         private float DetlaTime;
         public void Update()
         {
+            if (MoveC != null && MoveC.IsByDrag)
+                return;
             DetlaTime += Time.deltaTime;
             if (DetlaTime < 0.1f)
                 return;
             DetlaTime = 0;
 
-            Vector3 moveVector = Vector3.right * joystick.Horizontal + Vector3.forward * joystick.Vertical;
+            Vector3 moveVector = joystick.WorldDirection;// Vector3.right * joystick.Horizontal + Vector3.forward * joystick.Vertical;
+            moveVector.y = 0;
+            moveVector.Normalize();
             if (moveVector.magnitude > 0.1f)
             {
                 IsStop = false;
@@ -67,7 +78,7 @@ namespace ETHotfix
 
         private void OnNormalSkill()
         {
-            
+            ETModel.SessionComponent.Instance.Session.Send(new Frame_UnitSkillCastItem() {  });
         }
     }
 }

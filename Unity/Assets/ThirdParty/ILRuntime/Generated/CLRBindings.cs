@@ -39,7 +39,7 @@ namespace ILRuntime.Runtime.Generated
             System_Collections_Generic_IEnumerator_1_UnitInfo_Binding.Register(app);
             ETModel_UnitInfo_Binding.Register(app);
             ETModel_UnitComponent_Binding.Register(app);
-            ETModel_UnitFactory_Binding.Register(app);
+            //ETModel_UnitFactory_Binding.Register(app);
             ETModel_Unit_Binding.Register(app);
             VInt3_Binding.Register(app);
             ETModel_PlayerComponent_Binding.Register(app);

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace ETModel
 {
@@ -47,7 +48,18 @@ namespace ETModel
 		{
 			this.idUnits.Add(unit.Id, unit);
 		}
-
+        public Unit GetAround(Vector3 pos,float distance)
+        {
+            foreach(var kv in idUnits)
+            {
+                var dir = kv.Value.Position - pos;
+                if (dir.magnitude < distance)
+                {
+                    return kv.Value;
+                }
+            }
+            return null;
+        }
 		public Unit Get(long id)
 		{
 			Unit unit;

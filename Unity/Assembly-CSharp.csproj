@@ -161,6 +161,7 @@
     <Compile Include="Assets\Scripts\Module\Config\ConfigHelper.cs" />
     <Compile Include="Assets\Scripts\Module\Config\IConfig.cs" />
     <Compile Include="Assets\Scripts\Module\FrameSync\AnimatorComponent.cs" />
+    <Compile Include="Assets\Scripts\Module\FrameSync\BoneComponent.cs" />
     <Compile Include="Assets\Scripts\Module\FrameSync\Bullet.cs" />
     <Compile Include="Assets\Scripts\Module\FrameSync\CameraComponent.cs" />
     <Compile Include="Assets\Scripts\Module\FrameSync\ClientFrameComponent.cs" />
@@ -306,7 +307,6 @@
     <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_UIFactoryAttribute_Binding.cs" />
     <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_Unit_Binding.cs" />
     <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_UnitComponent_Binding.cs" />
-    <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_UnitFactory_Binding.cs" />
     <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_UnitInfo_Binding.cs" />
     <Compile Include="Assets\ThirdParty\ILRuntime\Generated\ETModel_UnOrderMultiMap_2_Type_ILTypeInstance_Binding.cs" />
     <Compile Include="Assets\ThirdParty\ILRuntime\Generated\Google_Protobuf_CodedInputStream_Binding.cs" />

@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4944615892037076}
   - component: {fileID: 95143842363305704}
+  - component: {fileID: 143045229249020028}
   m_Layer: 0
   m_Name: guaiwu
   m_TagString: Untagged
@@ -399,7 +400,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1095546210275710}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.998, y: 0.565, z: -1.0172087}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4083186934415738}
@@ -524,3 +525,20 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.000113368034, y: 0.053923555, z: -0.018462393}
     m_Extent: {x: 0.09029434, y: 0.07299908, z: 0.095093444}
   m_DirtyAABB: 0
+--- !u!143 &143045229249020028
+CharacterController:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1095546210275710}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 0.78
+  m_Radius: 0.9
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.45, z: 0}
