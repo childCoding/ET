@@ -98,6 +98,13 @@ message Frame_UnitRotation // IFrameMessage
 	ETModel.vector3 pos = 2;
 }
 
+message Frame_UnitSkillCastItem 	// IFrameMessage
+{
+	int32 RpcId = 90;
+	int64 Id = 94;
+	int32 Index = 1;
+}
+
 message C2R_Ping // IRequest
 {
 	int32 RpcId = 90;

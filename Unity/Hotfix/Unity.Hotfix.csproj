@@ -73,6 +73,7 @@
     <Compile Include="Base\Object\IDestroySystem.cs" />
     <Compile Include="Base\Object\IStartSystem.cs" />
     <Compile Include="Module\FrameSync\Frame_UnitMoveHandler.cs" />
+    <Compile Include="Module\FrameSync\Frame_UnitSkillHandler.cs" />
     <Compile Include="Module\FrameSync\Frame_UnitMoveStopHandler.cs" />
     <Compile Include="Module\FrameSync\OperaComponent.cs" />
     <Compile Include="Entity\Config\UnitConfig.cs" />

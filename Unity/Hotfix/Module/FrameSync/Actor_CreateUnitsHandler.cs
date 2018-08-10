@@ -27,7 +27,7 @@ namespace ETHotfix
                 {
                     unitComponent.MyUnit = unit;
                     unit.AddComponent<ItemComponent>();
-                    //Game.Scene.GetComponent<UIOperationComponent>().uni
+                    Game.Scene.GetComponent<UIComponent>().Get(UIType.UIOperation).GetComponent<UIOperationComponent>().Unit = unit;
                     ETModel.Game.Scene.AddComponent<CameraComponent, Unit>(unit);
                 }
             }

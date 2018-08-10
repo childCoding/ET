@@ -198,6 +198,7 @@ namespace ETModel
 		{
 			this.speeds.Clear();
 			this.animatorComponent?.SetFloatValue("Speed", 0);
+            //this.animatorComponent?.Play(MotionType.Idle);
 		}
 
 		/// <summary>

@@ -26,7 +26,7 @@ namespace ETHotfix
     public class UIOperationComponent : Component
     {
         private Joystick joystick = null;
-        private Unit unit = null;
+        public Unit Unit = null;
         public void Awake()
         {
             ReferenceCollector rc = this.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
@@ -56,10 +56,13 @@ namespace ETHotfix
             }
             else if (!IsStop)
             {
-                ETModel.SessionComponent.Instance.Session.Send(new Frame_UnitMoveStop() { Pos = ETModel.Utility.ETVector3FromUnityVector3(Vector3.zero) });
+                IsStop = true;
+                Vector3 dir = Unit.Rotation.eulerAngles;
+                Vector3 pos = Unit.Position;
+                ETModel.SessionComponent.Instance.Session.Send(new Frame_UnitMoveStop() { Pos = ETModel.Utility.ETVector3FromUnityVector3(pos),Dir = ETModel.Utility.ETVector3FromUnityVector3(dir) });
             }
 
-            Log.Debug($"dir : {moveVector} {Time.frameCount}");
+            //Log.Debug($"dir : {moveVector} {Time.frameCount}");
         }
 
         private void OnNormalSkill()
