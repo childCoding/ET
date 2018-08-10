@@ -1,6 +1,5 @@
 ﻿using System;
 using ETModel;
-using Google.Protobuf;
 
 namespace ETHotfix
 {
@@ -12,7 +11,7 @@ namespace ETHotfix
             M2G_CreateUnit response = new M2G_CreateUnit();
             try
             {
-                Unit unit = ComponentFactory.Create<Unit>();
+                Unit unit = ComponentFactory.Create<Unit,UnitType>(UnitType.Strong);
                 unit.PlayerId = message.PlayerId;
                 await unit.AddComponent<MailBoxComponent>().AddLocation();
                 unit.AddComponent<UnitGateComponent, long>(message.GateSessionId);

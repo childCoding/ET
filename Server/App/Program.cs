@@ -43,8 +43,7 @@ namespace App
 				OuterConfig outerConfig = startConfig.GetComponent<OuterConfig>();
 				InnerConfig innerConfig = startConfig.GetComponent<InnerConfig>();
 				ClientConfig clientConfig = startConfig.GetComponent<ClientConfig>();
-				
-				switch (startConfig.AppType)
+                switch (startConfig.AppType)
 				{
 					case AppType.Manager:
 						Game.Scene.AddComponent<NetInnerComponent, IPEndPoint>(innerConfig.IPEndPoint);
@@ -83,6 +82,7 @@ namespace App
 						Game.Scene.AddComponent<ActorMessageSenderComponent>();
 						Game.Scene.AddComponent<PlayerComponent>();
 						Game.Scene.AddComponent<UnitComponent>();
+						//Game.Scene.AddComponent<ItemComponent>();
 						Game.Scene.AddComponent<DBComponent>();
 						Game.Scene.AddComponent<DBProxyComponent>();
 						Game.Scene.AddComponent<DBCacheComponent>();

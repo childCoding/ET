@@ -8,10 +8,9 @@ namespace ETHotfix
     {
         protected override void Run(ETModel.Session session, Actor_CreateUnits message)
         {
-            // 加载Unit资源
-            ResourcesComponent resourcesComponent = ETModel.Game.Scene.GetComponent<ResourcesComponent>();
-            resourcesComponent.LoadBundle($"Unit.unity3d");
-
+            // 加载资源
+            ETModel.Game.Scene.GetComponent<ResourcesComponent>().LoadBundle("unit.unity3d");
+            ETModel.Game.Scene.GetComponent<ResourcesComponent>().LoadBundle("item.unity3d");
             UnitComponent unitComponent = ETModel.Game.Scene.GetComponent<UnitComponent>();
 
             foreach (UnitInfo unitInfo in message.Units)
@@ -26,7 +25,8 @@ namespace ETHotfix
                 unit.IntPos = new VInt3(unitInfo.X, 0, unitInfo.Z);
                 if (PlayerComponent.Instance.MyPlayer.Id == unit.PlayerId)
                 {
-                    PlayerComponent.Instance.MyPlayer.UnitId = unit.Id;
+                    unitComponent.MyUnit = unit;
+                    unit.AddComponent<ItemComponent>();
                     ETModel.Game.Scene.AddComponent<CameraComponent, Unit>(unit);
                 }
             }

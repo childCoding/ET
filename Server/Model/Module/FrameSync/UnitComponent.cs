@@ -58,5 +58,18 @@ namespace ETModel
 		{
 			return this.idUnits.Values.ToArray();
 		}
+
+        public List<Unit> GetUnitsByType(UnitType unitType)
+        {
+            List<Unit> units = new List<Unit>();
+            foreach (Unit unit in this.idUnits.Values)
+            {
+                if (unit.UnitType == unitType)
+                {
+                    units.Add(unit);
+                }
+            }
+            return units;
+        }
 	}
 }

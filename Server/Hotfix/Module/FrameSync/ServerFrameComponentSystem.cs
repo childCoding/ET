@@ -5,19 +5,18 @@ namespace ETHotfix
     [ObjectSystem]
     public class ServerFrameComponentSystem : AwakeSystem<ServerFrameComponent>
     {
-	    public override void Awake(ServerFrameComponent self)
-	    {
-		    self.Awake();
-	    }
+        public override void Awake(ServerFrameComponent self)
+        {
+            self.Awake();
+        }
     }
-	
+
     public static class ServerFrameComponentEx
     {
         public static void Awake(this ServerFrameComponent self)
         {
             self.Frame = 0;
-            self.FrameMessage = new FrameMessage() {Frame = self.Frame};
-
+            self.FrameMessage = new FrameMessage() { Frame = self.Frame };
             self.UpdateFrameAsync();
         }
 
@@ -35,11 +34,15 @@ namespace ETHotfix
                 }
 
                 await timerComponent.WaitAsync(100);
-				
                 MessageHelper.Broadcast(self.FrameMessage);
 
                 ++self.Frame;
                 self.FrameMessage = new FrameMessage() { Frame = self.Frame };
+                ItemComponent itemComponent = Game.Scene.GetComponent<ItemComponent>();
+                if (itemComponent != null)
+                {
+                    itemComponent.GetScore();
+                }
             }
         }
 

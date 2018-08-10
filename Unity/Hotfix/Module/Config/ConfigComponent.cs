@@ -38,7 +38,6 @@ namespace ETHotfix
 		{
 			this.allConfig.Clear();
 			List<Type> types = Game.EventSystem.GetTypes();
-
 			foreach (Type type in types)
 			{
 				object[] attrs = type.GetCustomAttributes(typeof (ConfigAttribute), false);

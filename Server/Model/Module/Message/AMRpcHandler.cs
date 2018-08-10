@@ -23,7 +23,6 @@ namespace ETModel
 				{
 					Log.Error($"消息类型转换错误: {message.GetType().Name} to {typeof (Request).Name}");
 				}
-
 				int rpcId = request.RpcId;
 
 				long instanceId = session.InstanceId;

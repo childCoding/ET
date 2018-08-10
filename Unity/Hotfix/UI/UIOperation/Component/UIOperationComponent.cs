@@ -37,7 +37,7 @@ namespace ETHotfix
 
 
             joystick = rc.Get<GameObject>("Joystick").GetComponent<Joystick>();
-            unit = ETModel.Game.Scene.GetComponent<UnitComponent>().Get(PlayerComponent.Instance.MyPlayer.UnitId);
+            unit = ETModel.Game.Scene.GetComponent<UnitComponent>().Get(UnitComponent.Instance.MyUnit.Id);
         }
         public void Update()
         {

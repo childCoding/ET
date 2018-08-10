@@ -93,3 +93,38 @@ message R2C_Ping // IResponse
 message G2C_Test // IMessage
 {
 }
+
+// 道具信息
+message ItemInformation
+{
+	int64 Id = 1;// 编号
+	int32 ItemId = 2;// 道具编号
+	string name = 3;// 名字
+	float X = 4;// 坐标
+	float Y = 5;// 坐标
+	float Z = 6;// 坐标
+}
+
+message Actor_CreateItems // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	repeated ItemInformation Items = 1;// 道具
+}
+
+// 删除道具
+message Actor_RemoveItems // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	repeated int64 Id = 1;// 编号
+}
+
+// 比赛信息
+message Actor_MatchInformation // IActorMessage
+{
+	int32 RpcId = 90;
+	int64 ActorId = 93;
+	int32 WeakScore = 1;// 弱势方积分
+	int32 StrongScore = 2;// 强势方积分
+}

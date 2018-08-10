@@ -1,0 +1,4 @@
+{ "_id": NumberLong(1), "MinX": 1, "MaxX": 1, "Y": 0.25, "MinZ": 1, "MaxZ": 1 }
+{ "_id": NumberLong(2), "MinX": 4, "MaxX": 6, "Y": 0.25, "MinZ": 4, "MaxZ": 6 }
+{ "_id": NumberLong(3), "MinX": 7, "MaxX": 9, "Y": 0.25, "MinZ": 7, "MaxZ": 9 }
+{ "_id": NumberLong(4), "MinX": 10, "MaxX": 12, "Y": 0.25, "MaxZ": 10, "MaxZ": 12 }

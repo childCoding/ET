@@ -5,7 +5,7 @@ namespace ETModel
 {
 	public abstract class AMActorHandler<E, Message>: IMActorHandler where E: Entity where Message : class 
 	{
-		protected abstract Task Run(E entity, Message message);
+		protected abstract Task Run(Session session, E entity, Message message);
 
 		public async Task Handle(Session session, Entity entity, IActorMessage actorRequest)
 		{
@@ -29,7 +29,7 @@ namespace ETModel
 			};
 			session.Reply(response);
 
-			await this.Run(e, msg);
+			await this.Run(session, e, msg);
 		}
 
 		public Type GetMessageType()

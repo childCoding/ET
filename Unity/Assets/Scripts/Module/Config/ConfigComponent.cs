@@ -37,11 +37,10 @@ namespace ETModel
 		{
 			this.allConfig.Clear();
 			List<Type> types = Game.EventSystem.GetTypes(typeof(ConfigAttribute));
-
 			foreach (Type type in types)
 			{
 				object[] attrs = type.GetCustomAttributes(typeof (ConfigAttribute), false);
-				if (attrs.Length == 0)
+                if (attrs.Length == 0)
 				{
 					continue;
 				}

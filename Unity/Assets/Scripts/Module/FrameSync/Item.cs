@@ -2,21 +2,9 @@
 
 namespace ETModel
 {
-	public enum UnitType
+	public sealed class Item: Entity
 	{
-		Hero,
-		Npc
-	}
-	
-	public sealed class Unit: Entity
-	{
-        public long PlayerId { get; set; }
-
-		public VInt3 IntPos;
-
 		public GameObject GameObject;
-        // 积分
-        public int Score { get; set; }
 		
 		public void Awake()
 		{

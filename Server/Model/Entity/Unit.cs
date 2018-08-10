@@ -5,8 +5,8 @@ namespace ETModel
 {
 	public enum UnitType
 	{
-		Hero,
-		Npc
+		Weak,
+		Strong
 	}
 
 	[ObjectSystem]
@@ -22,6 +22,8 @@ namespace ETModel
 	{
 		public UnitType UnitType { get; private set; }
 		public long PlayerId { get; set; }
+        // 玩家积分
+        public int Score { get; set; }
 		[BsonIgnore]
 		public Vector3 Position { get; set; }
 		

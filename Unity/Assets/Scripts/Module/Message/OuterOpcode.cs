@@ -40,6 +40,21 @@ namespace ETModel
 	[Message(OuterOpcode.G2C_Test)]
 	public partial class G2C_Test : IMessage {}
 
+// 道具信息
+	[Message(OuterOpcode.ItemInformation)]
+	public partial class ItemInformation {}
+
+	[Message(OuterOpcode.Actor_CreateItems)]
+	public partial class Actor_CreateItems : IActorMessage {}
+
+// 删除道具
+	[Message(OuterOpcode.Actor_RemoveItems)]
+	public partial class Actor_RemoveItems : IActorMessage {}
+
+// 比赛信息
+	[Message(OuterOpcode.Actor_MatchInformation)]
+	public partial class Actor_MatchInformation : IActorMessage {}
+
 }
 namespace ETModel
 {
@@ -58,5 +73,9 @@ namespace ETModel
 		 public const ushort C2R_Ping = 111;
 		 public const ushort R2C_Ping = 112;
 		 public const ushort G2C_Test = 113;
+		 public const ushort ItemInformation = 114;
+		 public const ushort Actor_CreateItems = 115;
+		 public const ushort Actor_RemoveItems = 116;
+		 public const ushort Actor_MatchInformation = 117;
 	}
 }
