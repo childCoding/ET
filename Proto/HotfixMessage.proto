@@ -70,24 +70,3 @@ message G2C_PlayerInfo // IResponse
 	PlayerInfo PlayerInfos = 1;
 }
 
-message Frame_UnitMove // IFrameMessage
-{
-	int32 RpcId = 90;
-	int64 Id = 94;
-	ETModel.vector3 dir = 1;
-	ETModel.vector3 pos = 2;
-}
-message Frame_UnitMoveStop // IFrameMessage
-{
-	int32 RpcId = 90;
-	int64 Id = 94;
-	ETModel.vector3 dir = 1;
-	ETModel.vector3 pos = 2;
-}
-message Frame_UnitRotation // IFrameMessage
-{
-	int32 RpcId = 90;
-	int64 Id = 94;
-	ETModel.vector3 rot = 1; //角色朝向
-	ETModel.vector3 pos = 2;
-}

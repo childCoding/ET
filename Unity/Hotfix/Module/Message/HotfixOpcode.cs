@@ -31,15 +31,6 @@ namespace ETHotfix
 	[Message(HotfixOpcode.G2C_PlayerInfo)]
 	public partial class G2C_PlayerInfo : IResponse {}
 
-	[Message(HotfixOpcode.Frame_UnitMove)]
-	public partial class Frame_UnitMove : IFrameMessage {}
-
-	[Message(HotfixOpcode.Frame_UnitMoveStop)]
-	public partial class Frame_UnitMoveStop : IFrameMessage {}
-
-	[Message(HotfixOpcode.Frame_UnitRotation)]
-	public partial class Frame_UnitRotation : IFrameMessage {}
-
 }
 namespace ETHotfix
 {
@@ -55,8 +46,5 @@ namespace ETHotfix
 		 public const ushort PlayerInfo = 10008;
 		 public const ushort C2G_PlayerInfo = 10009;
 		 public const ushort G2C_PlayerInfo = 10010;
-		 public const ushort Frame_UnitMove = 10011;
-		 public const ushort Frame_UnitMoveStop = 10012;
-		 public const ushort Frame_UnitRotation = 10013;
 	}
 }

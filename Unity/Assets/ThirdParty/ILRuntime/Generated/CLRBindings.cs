@@ -43,7 +43,6 @@ namespace ILRuntime.Runtime.Generated
             ETModel_Unit_Binding.Register(app);
             VInt3_Binding.Register(app);
             ETModel_PlayerComponent_Binding.Register(app);
-            ETModel_Player_Binding.Register(app);
             ETModel_ComponentWithId_Binding.Register(app);
             ETModel_CameraComponent_Binding.Register(app);
             System_Collections_IEnumerator_Binding.Register(app);

@@ -37,18 +37,31 @@ namespace ETHotfix
 
 
             joystick = rc.Get<GameObject>("Joystick").GetComponent<Joystick>();
-            unit = ETModel.Game.Scene.GetComponent<UnitComponent>().Get(UnitComponent.Instance.MyUnit.Id);
+            //unit = ETModel.Game.Scene.GetComponent<UnitComponent>().Get(UnitComponent.Instance.MyUnit.Id);
         }
+        private bool IsStop = true;
+        private float DetlaTime;
         public void Update()
         {
+            DetlaTime += Time.deltaTime;
+            if (DetlaTime < 0.1f)
+                return;
+            DetlaTime = 0;
+
             Vector3 moveVector = Vector3.right * joystick.Horizontal + Vector3.forward * joystick.Vertical;
             if (moveVector.magnitude > 0.1f)
             {
-                Log.Debug($"dir : {moveVector}");
-                SessionComponent.Instance.Session.Send(new Frame_UnitMove() { Dir = ETModel.Utility.ETVector3FromUnityVector3(moveVector) });
+                IsStop = false;
+                ETModel.SessionComponent.Instance.Session.Send(new Frame_UnitMove() { Dir = ETModel.Utility.ETVector3FromUnityVector3(moveVector) });
             }
+            else if (!IsStop)
+            {
+                ETModel.SessionComponent.Instance.Session.Send(new Frame_UnitMoveStop() { Pos = ETModel.Utility.ETVector3FromUnityVector3(Vector3.zero) });
+            }
+
+            Log.Debug($"dir : {moveVector} {Time.frameCount}");
         }
-        
+
         private void OnNormalSkill()
         {
             

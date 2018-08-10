@@ -31,6 +31,15 @@ namespace ETModel
 	[Message(OuterOpcode.Frame_ClickMap)]
 	public partial class Frame_ClickMap : IFrameMessage {}
 
+	[Message(OuterOpcode.Frame_UnitMove)]
+	public partial class Frame_UnitMove : IFrameMessage {}
+
+	[Message(OuterOpcode.Frame_UnitMoveStop)]
+	public partial class Frame_UnitMoveStop : IFrameMessage {}
+
+	[Message(OuterOpcode.Frame_UnitRotation)]
+	public partial class Frame_UnitRotation : IFrameMessage {}
+
 	[Message(OuterOpcode.C2R_Ping)]
 	public partial class C2R_Ping : IRequest {}
 
@@ -70,12 +79,15 @@ namespace ETModel
 		 public const ushort UnitInfo = 108;
 		 public const ushort Actor_CreateUnits = 109;
 		 public const ushort Frame_ClickMap = 110;
-		 public const ushort C2R_Ping = 111;
-		 public const ushort R2C_Ping = 112;
-		 public const ushort G2C_Test = 113;
-		 public const ushort ItemInformation = 114;
-		 public const ushort Actor_CreateItems = 115;
-		 public const ushort Actor_RemoveItems = 116;
-		 public const ushort Actor_MatchInformation = 117;
+		 public const ushort Frame_UnitMove = 111;
+		 public const ushort Frame_UnitMoveStop = 112;
+		 public const ushort Frame_UnitRotation = 113;
+		 public const ushort C2R_Ping = 114;
+		 public const ushort R2C_Ping = 115;
+		 public const ushort G2C_Test = 116;
+		 public const ushort ItemInformation = 117;
+		 public const ushort Actor_CreateItems = 118;
+		 public const ushort Actor_RemoveItems = 119;
+		 public const ushort Actor_MatchInformation = 120;
 	}
 }
