@@ -605,6 +605,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4607617938335072}
   - component: {fileID: 95644630811828766}
+  - component: {fileID: 143131798301315376}
   m_Layer: 0
   m_Name: hero
   m_TagString: Untagged
@@ -1438,3 +1439,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.34033203, y: 0.010821387, z: -0.035229653}
     m_Extent: {x: 0.6561395, y: 0.3394543, z: 0.66470075}
   m_DirtyAABB: 0
+--- !u!143 &143131798301315376
+CharacterController:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1845539017613940}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 1.3
+  m_Radius: 0.3
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.59, z: 0}
