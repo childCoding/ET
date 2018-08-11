@@ -6,7 +6,10 @@ namespace ETModel
 	public enum UnitType
 	{
 		Weak,
-		Strong
+		Strong1,
+        Strong2,
+        Strong3,
+        Strong4,
 	}
 
 	[ObjectSystem]

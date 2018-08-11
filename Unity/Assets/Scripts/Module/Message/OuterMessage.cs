@@ -2134,6 +2134,205 @@ namespace ETModel {
 
   }
 
+  /// <summary>
+  /// 选择类型
+  /// </summary>
+  public partial class C2G_ChooseType : pb::IMessage {
+    private static readonly pb::MessageParser<C2G_ChooseType> _parser = new pb::MessageParser<C2G_ChooseType>(() => new C2G_ChooseType());
+    public static pb::MessageParser<C2G_ChooseType> Parser { get { return _parser; } }
+
+    private int type_;
+    public int Type {
+      get { return type_; }
+      set {
+        type_ = value;
+      }
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Type != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Type);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      if (Type != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Type);
+      }
+      return size;
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      type_ = 0;
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            Type = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  /// 玩家选择类型
+  /// </summary>
+  public partial class PlayerChooseType : pb::IMessage {
+    private static readonly pb::MessageParser<PlayerChooseType> _parser = new pb::MessageParser<PlayerChooseType>(() => new PlayerChooseType());
+    public static pb::MessageParser<PlayerChooseType> Parser { get { return _parser; } }
+
+    private long id_;
+    public long Id {
+      get { return id_; }
+      set {
+        id_ = value;
+      }
+    }
+
+    private int type_;
+    public int Type {
+      get { return type_; }
+      set {
+        type_ = value;
+      }
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Id != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(Id);
+      }
+      if (Type != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(Type);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      if (Id != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Id);
+      }
+      if (Type != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Type);
+      }
+      return size;
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      id_ = 0;
+      type_ = 0;
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            Id = input.ReadInt64();
+            break;
+          }
+          case 16: {
+            Type = input.ReadInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  /// 大厅信息
+  /// </summary>
+  public partial class Actor_HallInformation : pb::IMessage {
+    private static readonly pb::MessageParser<Actor_HallInformation> _parser = new pb::MessageParser<Actor_HallInformation>(() => new Actor_HallInformation());
+    public static pb::MessageParser<Actor_HallInformation> Parser { get { return _parser; } }
+
+    private int rpcId_;
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    private long actorId_;
+    public long ActorId {
+      get { return actorId_; }
+      set {
+        actorId_ = value;
+      }
+    }
+
+    private static readonly pb::FieldCodec<global::ETModel.PlayerChooseType> _repeated_playerChooseType_codec
+        = pb::FieldCodec.ForMessage(10, global::ETModel.PlayerChooseType.Parser);
+    private pbc::RepeatedField<global::ETModel.PlayerChooseType> playerChooseType_ = new pbc::RepeatedField<global::ETModel.PlayerChooseType>();
+    public pbc::RepeatedField<global::ETModel.PlayerChooseType> PlayerChooseType {
+      get { return playerChooseType_; }
+      set { playerChooseType_ = value; }
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      playerChooseType_.WriteTo(output, _repeated_playerChooseType_codec);
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (ActorId != 0L) {
+        output.WriteRawTag(232, 5);
+        output.WriteInt64(ActorId);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (ActorId != 0L) {
+        size += 2 + pb::CodedOutputStream.ComputeInt64Size(ActorId);
+      }
+      size += playerChooseType_.CalculateSize(_repeated_playerChooseType_codec);
+      return size;
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      playerChooseType_.Clear();
+      rpcId_ = 0;
+      actorId_ = 0;
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            playerChooseType_.AddEntriesFrom(input, _repeated_playerChooseType_codec);
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+          case 744: {
+            ActorId = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   #endregion
 
 }

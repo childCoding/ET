@@ -18,6 +18,16 @@ namespace ETHotfix
 				
 				actorMessageSenderComponent.GetWithActorId(unitGateComponent.GateSessionActorId).Send(message);
 			}
-		}
-	}
+        }
+
+        public static void BroadcastByPlayer(IActorMessage message)
+        {
+            Player[] players = Game.Scene.GetComponent<PlayerComponent>().GetAll();
+            ActorMessageSenderComponent actorMessageSenderComponent = Game.Scene.GetComponent<ActorMessageSenderComponent>();
+            foreach (Player player in players)
+            {
+                actorMessageSenderComponent.GetWithActorId(player.GateSessionActorId).Send(message);
+            }
+        }
+    }
 }

@@ -10,7 +10,8 @@ namespace ETHotfix
 		{
 			Unit unit = ETModel.Game.Scene.GetComponent<UnitComponent>().Get(message.Id);
 			MoveComponent moveComponent = unit.GetComponent<MoveComponent>();
-            unit.Rotation
+            //Transform transform = unit.GameObject.transform;
+            //transform.Translate(transform, )
             Vector3 dest = unit.Position + unit.Rotation.eulerAngles.normalized * -5;
 			moveComponent.Turn2D(dest - unit.Position);
 			moveComponent.MoveToDest(dest, 5);

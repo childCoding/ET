@@ -75,6 +75,18 @@ namespace ETModel
 	[Message(OuterOpcode.Frame_Sprint)]
 	public partial class Frame_Sprint : IFrameMessage {}
 
+// 选择类型
+	[Message(OuterOpcode.C2G_ChooseType)]
+	public partial class C2G_ChooseType : IMessage {}
+
+// 玩家选择类型
+	[Message(OuterOpcode.PlayerChooseType)]
+	public partial class PlayerChooseType {}
+
+// 大厅信息
+	[Message(OuterOpcode.Actor_HallInformation)]
+	public partial class Actor_HallInformation : IActorMessage {}
+
 }
 namespace ETModel
 {
@@ -103,5 +115,8 @@ namespace ETModel
 		 public const ushort Actor_MatchInformation = 121;
 		 public const ushort Frame_SpitScore = 122;
 		 public const ushort Frame_Sprint = 123;
+		 public const ushort C2G_ChooseType = 124;
+		 public const ushort PlayerChooseType = 125;
+		 public const ushort Actor_HallInformation = 126;
 	}
 }

@@ -13,7 +13,7 @@ namespace ETHotfix
             {
                 actorMatchInformation.WeakScore += unit.Score;
             }
-            units = self.GetUnitsByType(UnitType.Strong);
+            units = self.GetUnitsByType(UnitType.Strong1);
             foreach (Unit unit in units)
             {
                 actorMatchInformation.StrongScore += unit.Score;

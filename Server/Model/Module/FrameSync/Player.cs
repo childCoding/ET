@@ -14,8 +14,12 @@
 		public string Account { get; private set; }
 		
 		public long UnitId { get; set; }
+        // 网关编号
+        public long GateSessionActorId { get; set; }
+        // 类型
+        public UnitType UnitType { get; set; }
 
-		public void Awake(string account)
+        public void Awake(string account)
 		{
 			this.Account = account;
 		}

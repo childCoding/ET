@@ -17,7 +17,7 @@ namespace ETHotfix
 	public class UILobbyComponent : Component
 	{
 		private GameObject enterMap;
-		private Text text;
+		public Text Text;
 
 		public void Awake()
 		{
@@ -34,9 +34,18 @@ namespace ETHotfix
 			
 			enterMap = rc.Get<GameObject>("EnterMap");
 			enterMap.GetComponent<Button>().onClick.Add(this.EnterMap);
-
-			this.text = rc.Get<GameObject>("Text").GetComponent<Text>();
-		}
+			this.Text = rc.Get<GameObject>("Text").GetComponent<Text>();
+            GameObject button = rc.Get<GameObject>("Weak");
+            button.GetComponent<Button>().onClick.AddListener(() => { this.ChooseUnitType(0); });
+            button = rc.Get<GameObject>("Strong1");
+            button.GetComponent<Button>().onClick.AddListener(() => { this.ChooseUnitType(1); });
+            button = rc.Get<GameObject>("Strong2");
+            button.GetComponent<Button>().onClick.AddListener(() => { this.ChooseUnitType(2); });
+            button = rc.Get<GameObject>("Strong3");
+            button.GetComponent<Button>().onClick.AddListener(() => { this.ChooseUnitType(3); });
+            button = rc.Get<GameObject>("Strong4");
+            button.GetComponent<Button>().onClick.AddListener(() => { this.ChooseUnitType(4); });
+        }
 
 		private void OnSend()
 		{
@@ -90,5 +99,13 @@ namespace ETHotfix
 				Log.Error(e);
 			}	
 		}
-	}
+
+        private void ChooseUnitType(int type)
+        {
+            C2G_ChooseType chooseType = new C2G_ChooseType();
+            chooseType.Type = type;
+            ETModel.SessionComponent.Instance.Session.Send(chooseType);
+        }
+
+    }
 }

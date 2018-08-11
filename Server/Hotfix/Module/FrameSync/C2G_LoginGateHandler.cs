@@ -20,6 +20,7 @@ namespace ETHotfix
 					return;
 				}
 				Player player = ComponentFactory.Create<Player, string>(account);
+                player.GateSessionActorId = session.InstanceId;
 				Game.Scene.GetComponent<PlayerComponent>().Add(player);
 				session.AddComponent<SessionPlayerComponent>().Player = player;
 				session.AddComponent<MailBoxComponent, string>(ActorType.GateSession);
