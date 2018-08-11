@@ -15,10 +15,12 @@ namespace ETHotfix
 
             foreach (UnitInfo unitInfo in message.Units)
             {
+                Log.Debug($"unitid:{unitInfo.UnitId} playerid:{unitInfo.PlayerId} type:{unitInfo.Type} myunitid:{PlayerComponent.Instance.MyPlayer.Id}");
                 if (unitComponent.Get(unitInfo.UnitId) != null)
                 {
                     continue;
                 }
+                Log.Debug($"unitid:{unitInfo.UnitId} create");
                 Unit unit = UnitFactory.Create(unitInfo.UnitId, (UnitType)unitInfo.Type);
                 unit.PlayerId = unitInfo.PlayerId;
                 unit.Position = new Vector3(unitInfo.X / 1000f, 0, unitInfo.Z / 1000f);
@@ -30,9 +32,10 @@ namespace ETHotfix
                     var ui = Game.Scene.GetComponent<UIComponent>().Get(UIType.UIOperation);
                     ui.GetComponent<UIOperationComponent>().SetUnit(unit);
                     ETModel.Game.Scene.AddComponent<CameraComponent, Unit>(unit);
+                    Game.Scene.AddComponent<OperaComponent>();
                 }
             }
-            Game.Scene.AddComponent<OperaComponent>();
+            
         }
     }
 }

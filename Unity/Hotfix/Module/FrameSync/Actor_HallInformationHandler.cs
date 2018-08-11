@@ -9,12 +9,16 @@ namespace ETHotfix
 		protected override void Run(ETModel.Session session, Actor_HallInformation message)
 		{
             UILobbyComponent uILobbyComponent = Game.Scene.GetComponent<UIComponent>().Get(UIType.UILobby).GetComponent<UILobbyComponent>();
-            string text = "";
+
+            for(int i = 0;i < 5;i++)
+            {
+                uILobbyComponent.InitPlayer(i, 0);
+            }
             foreach (PlayerChooseType playerChooseType in message.PlayerChooseType)
             {
-                text += "(" + playerChooseType.Id.ToString() + ","+ playerChooseType.Type.ToString() + ")";
+                uILobbyComponent.InitPlayer(playerChooseType.Type, playerChooseType.Id);
             }
-            uILobbyComponent.Text.text = text;
+
         }
 	}
 }
