@@ -92,7 +92,7 @@ namespace ETHotfix
 			{
                 Game.Scene.GetComponent<UIComponent>().Create(UIType.UIOperation);
                 Game.Scene.GetComponent<UIComponent>().Remove(UIType.UILobby);
-                G2C_EnterMap enterMap = (G2C_EnterMap)await ETModel.SessionComponent.Instance.Session.Call(new C2G_EnterMap());
+                await ETModel.SessionComponent.Instance.Session.Call(new C2G_EnterMap());
             }
 			catch (Exception e)
 			{

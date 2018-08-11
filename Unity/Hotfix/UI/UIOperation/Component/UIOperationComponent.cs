@@ -28,6 +28,10 @@ namespace ETHotfix
         private Joystick joystick = null;
         private Unit Unit = null;
         private MoveComponent MoveC = null;
+        // 弱势方积分
+        public Text WeakScore { get; set; }
+        // 强势方积分
+        public Text StrongScore { get; set; }
 
         public void Awake()
         {
@@ -46,6 +50,8 @@ namespace ETHotfix
 
             joystick = rc.Get<GameObject>("Joystick").GetComponent<Joystick>();
             //unit = ETModel.Game.Scene.GetComponent<UnitComponent>().Get(UnitComponent.Instance.MyUnit.Id);
+            this.WeakScore = rc.Get<GameObject>("Weak").GetComponent<Text>();
+            this.StrongScore = rc.Get<GameObject>("Strong").GetComponent<Text>();
         }
         public void SetUnit(Unit u)
         {
@@ -70,7 +76,8 @@ namespace ETHotfix
                 moveVector *= 8;
                 //moveVector.Normalize();
                 IsStop = false;
-                ETModel.SessionComponent.Instance.Session.Send(new Frame_UnitMove() { Dir = ETModel.Utility.ETVector3FromUnityVector3(moveVector) });
+                Vector3 pos = Unit.Position;
+                ETModel.SessionComponent.Instance.Session.Send(new Frame_UnitMove() { Dir = ETModel.Utility.ETVector3FromUnityVector3(moveVector), Pos = ETModel.Utility.ETVector3FromUnityVector3(pos) });
             }
             else if (!IsStop)
             {

@@ -11,11 +11,13 @@ namespace ETHotfix
             ItemComponent itemComponent = ETModel.Game.Scene.GetComponent<ItemComponent>();
             foreach (ItemInformation itemInformation in message.Items)
             {
-                if (itemComponent.Get(itemInformation.Id) != null)
+                Item item = itemComponent.Get(itemInformation.Id);
+                if (item != null)
                 {
+                    item.GameObject.SetActive(true);
                     continue;
                 }
-                Item item = ItemFactory.Create(itemInformation.Id);
+                item = ItemFactory.Create(itemInformation.Id);
                 item.Position = new Vector3(itemInformation.X, itemInformation.Y, itemInformation.Z);
             }
 
