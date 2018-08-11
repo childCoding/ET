@@ -82,7 +82,7 @@ namespace ETModel
 
 				this.MontionSpeed = 1;
 				this.MotionType = MotionType.None;
-			}
+            }
 			catch (Exception ex)
 			{
 				throw new Exception($"动作播放失败: {this.MotionType}", ex);

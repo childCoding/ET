@@ -49,22 +49,33 @@ namespace ETModel
 
 		private void UpdatePosition()
 		{
-            var dir = Quaternion.Euler( m_y,m_x, 0) * Vector3.forward;
-            dir *= m_disttance;
-            this.mainCamera.transform.position = Unit.Position + dir;
+            var targetpos = Unit.Position + Vector3.up * 0.5f;
+            var mrotation = Quaternion.Euler( -m_y,m_x, 0) ;
+            var mposition = mrotation * new Vector3(0, 0, -m_disttance) + targetpos;
+            var vcamera = mposition - mainCamera.transform.position;
+
+            //RaycastHit hit;
+            //if (Physics.Raycast(new Ray(mainCamera.transform.position, vcamera.normalized), out hit, vcamera.magnitude))
+            //{
+            //    var newpos = hit.point + hit.normal * 0.2f;
+            //    mrotation = Quaternion.LookRotation(newpos - targetpos);
+            //    mposition = mrotation * new Vector3(0, 0, -m_disttance) + targetpos;
+            //}
+
+            this.mainCamera.transform.position = mposition;
 
             //var pos = Unit.Transform.position - this.Unit.Transform.forward * 0.5f + this.Unit.Transform.up * 0.2f;
             //this.mainCamera.transform.position = pos;
-            this.mainCamera.transform.LookAt(Unit.Position);
+            this.mainCamera.transform.LookAt(targetpos);
         }
-        private float m_x = -45;
-        private float m_y = -60;
+        private float m_x = 0;
+        private float m_y = -15;
         private float m_disttance = 2f;
         // 摄像机旋转
         public void UpdateRotation(Vector3 v)
         {
             m_y += v.y;
-            m_y = ClampAngle(m_y, -85, 85); ;
+            m_y = ClampAngle(m_y, -30, 30); ;
 
             m_x += v.x;
             m_x = ClampAngle(m_x, -360, 360); ;

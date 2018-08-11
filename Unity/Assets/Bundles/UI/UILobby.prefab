@@ -1422,16 +1422,16 @@ MonoBehaviour:
     gameObject: {fileID: 1045469242335138}
   - key: Text
     gameObject: {fileID: 1542152125762418}
-  - key: 2114647516
-    gameObject: {fileID: 0}
-  - key: 1935019799
-    gameObject: {fileID: 0}
-  - key: 1140907331
-    gameObject: {fileID: 0}
-  - key: -1806470347
-    gameObject: {fileID: 0}
-  - key: -1058011964
-    gameObject: {fileID: 0}
+  - key: Strong1
+    gameObject: {fileID: 1847396209952806}
+  - key: Strong2
+    gameObject: {fileID: 1103622221608042}
+  - key: Strong3
+    gameObject: {fileID: 1425817299840080}
+  - key: Strong4
+    gameObject: {fileID: 1845655334352962}
+  - key: Weak
+    gameObject: {fileID: 1704477870053320}
 --- !u!114 &114963074229419860
 MonoBehaviour:
   m_ObjectHideFlags: 1

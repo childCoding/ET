@@ -109,36 +109,37 @@ namespace ETModel
 		{
 			UpdateTurn();
 
-			if (this.IsArrived)
-			{
-				return;
-			}
+			//if (this.IsArrived)
+			//{
+			//	return;
+			//}
 
-			if (this.Speed == Vector3.zero)
-			{
-				return;
-			}
+			//if (this.Speed == Vector3.zero)
+			//{
+			//	return;
+			//}
 
 			Unit unit = this.GetParent<Unit>();
 			Vector3 moveVector3 = this.Speed * Time.deltaTime;
 
-			if (this.hasDest)
-			{
-				float dist = (this.Dest - unit.Position).magnitude;
-				if (moveVector3.magnitude >= dist || dist < 0.1f)
-				{
-					unit.Position = this.Dest;
-					this.IsArrived = true;
-					return;
-				}
-			}
+            //if (this.hasDest)
+            //{
+            //	float dist = (this.Dest - unit.Position).magnitude;
+            //	if (moveVector3.magnitude >= dist || dist < 0.1f)
+            //	{
+            //		unit.Position = this.Dest;
+            //		this.IsArrived = true;
+            //		return;
+            //	}
+            //}
+            moveVector3 += animatorComponent.Animator ? animatorComponent.Animator.deltaPosition:Vector3.zero;
             if (!characterComponent.isGrounded)
             {
                 moveVector3.y += -0.5f;
             }
             //unit.Position = unit.Position + moveVector3;
-            characterComponent.Move(moveVector3);
-
+            if(moveVector3.magnitude > 0.001f)
+                characterComponent.Move(moveVector3);
 
         }
         #region 移动

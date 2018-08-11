@@ -72,6 +72,7 @@
     <Compile Include="Base\Object\IComponentSerialize.cs" />
     <Compile Include="Base\Object\IDestroySystem.cs" />
     <Compile Include="Base\Object\IStartSystem.cs" />
+    <Compile Include="Module\FrameSync\Actor_HallInformationHandler.cs" />
     <Compile Include="Module\FrameSync\Frame_UnitMoveHandler.cs" />
     <Compile Include="Module\FrameSync\Frame_UnitSkillHandler.cs" />
     <Compile Include="Module\FrameSync\Frame_UnitMoveStopHandler.cs" />

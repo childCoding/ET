@@ -13,12 +13,12 @@ namespace ETHotfix
             Vector3 dir = ETModel.Utility.UnityVector3FromETVector3(message.Dir);
             Vector3 pos = ETModel.Utility.UnityVector3FromETVector3(message.Pos);
             
-            float distance = (unit.Position - pos).magnitude;
-            if (distance > 0.1f)
-            {
-                moveComponent.MoveToDest(pos,1);
-            }
-            else
+            //float distance = (unit.Position - pos).magnitude;
+            //if (distance > 0.1f)
+            //{
+            //    moveComponent.MoveToDest(pos,1);
+            //}
+            //else
             {
                 unit.Position = pos;
                 moveComponent.Stop();

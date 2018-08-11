@@ -33,9 +33,15 @@ namespace ETHotfix
         {
             ReferenceCollector rc = this.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
             GameObject NormalSkill = rc.Get<GameObject>("NormalSkill");
-            //GameObject sendRpcBtn = rc.Get<GameObject>("" + "SendRpc");
+            GameObject NormalSkill0 = rc.Get<GameObject>("NormalSkill0");
+            GameObject NormalSkill1 = rc.Get<GameObject>("NormalSkill1");
+            GameObject NormalSkill2 = rc.Get<GameObject>("NormalSkill2");
+
             NormalSkill.GetComponent<Button>().onClick.Add(this.OnNormalSkill);
-            //sendRpcBtn.GetComponent<Button>().onClick.Add(this.OnSendRpc);
+            NormalSkill0.GetComponent<Button>().onClick.Add(this.OnNormalSkill0);
+            NormalSkill1.GetComponent<Button>().onClick.Add(this.OnNormalSkill1);
+            NormalSkill2.GetComponent<Button>().onClick.Add(this.OnNormalSkill2);
+  
 
 
             joystick = rc.Get<GameObject>("Joystick").GetComponent<Joystick>();
@@ -59,9 +65,10 @@ namespace ETHotfix
 
             Vector3 moveVector = joystick.WorldDirection;// Vector3.right * joystick.Horizontal + Vector3.forward * joystick.Vertical;
             moveVector.y = 0;
-            moveVector.Normalize();
             if (moveVector.magnitude > 0.1f)
             {
+                moveVector *= 8;
+                //moveVector.Normalize();
                 IsStop = false;
                 ETModel.SessionComponent.Instance.Session.Send(new Frame_UnitMove() { Dir = ETModel.Utility.ETVector3FromUnityVector3(moveVector) });
             }
@@ -78,7 +85,19 @@ namespace ETHotfix
 
         private void OnNormalSkill()
         {
-            ETModel.SessionComponent.Instance.Session.Send(new Frame_UnitSkillCastItem() {  });
+            ETModel.SessionComponent.Instance.Session.Send(new Frame_UnitSkillCastItem() { Index = 0   });
+        }
+        private void OnNormalSkill0()
+        {
+            ETModel.SessionComponent.Instance.Session.Send(new Frame_UnitSkillCastItem() { Index = 1   });
+        }
+        private void OnNormalSkill1()
+        {
+            ETModel.SessionComponent.Instance.Session.Send(new Frame_UnitSkillCastItem() { Index = 2 });
+        }
+        private void OnNormalSkill2()
+        {
+            ETModel.SessionComponent.Instance.Session.Send(new Frame_UnitSkillCastItem() { Index = 3 });
         }
     }
 }

@@ -69,6 +69,7 @@ namespace ETHotfix
                 Vector3 rotation = new Vector3(pos.x, pos.y, 0);
                 ETModel.Game.Scene.GetComponent<CameraComponent>().UpdateRotation(rotation);
             }
+
         }
 
 	    public async void TestActor()

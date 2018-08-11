@@ -44,4 +44,22 @@ public class FixedJoystick : Joystick
         //Vector3 moveVector = unit.Position * 1000;
         //SessionComponent.Instance.Session.Send(new Frame_ClickMap() { X = (int)moveVector.x, Z = (int)moveVector.z });
     }
+    public void Update()
+    {
+        if(Input.GetKey(KeyCode.W))
+        {
+            inputVector.y = 1;
+        }else if (Input.GetKey(KeyCode.S))
+        {
+            inputVector.y = -1;
+        }
+        else if (Input.GetKey(KeyCode.A))
+        {
+            inputVector.x = 1;
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            inputVector.x = 1;
+        }
+    }
 }
