@@ -91,6 +91,9 @@ namespace ETModel
 	[Message(OuterOpcode.Actor_HallInformation)]
 	public partial class Actor_HallInformation : IActorMessage {}
 
+	[Message(OuterOpcode.G2C_PlayerEnterMap)]
+	public partial class G2C_PlayerEnterMap : IMessage {}
+
 }
 namespace ETModel
 {
@@ -123,5 +126,6 @@ namespace ETModel
 		 public const ushort C2G_ChooseType = 125;
 		 public const ushort PlayerChooseType = 126;
 		 public const ushort Actor_HallInformation = 127;
+		 public const ushort G2C_PlayerEnterMap = 128;
 	}
 }

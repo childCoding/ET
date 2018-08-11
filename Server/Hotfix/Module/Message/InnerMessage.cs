@@ -382,4 +382,26 @@ namespace ETHotfix
 
 	}
 
+	[Message(InnerOpcode.G2G_MatchStartRequest)]
+	public partial class G2G_MatchStartRequest: IRequest
+	{
+		public int RpcId { get; set; }
+
+		public long PlayerId { get; set; }
+
+		public long GateSessionId { get; set; }
+
+	}
+
+	[Message(InnerOpcode.G2G_MatchStartResponse)]
+	public partial class G2G_MatchStartResponse: IResponse
+	{
+		public int RpcId { get; set; }
+
+		public int Error { get; set; }
+
+		public string Message { get; set; }
+
+	}
+
 }

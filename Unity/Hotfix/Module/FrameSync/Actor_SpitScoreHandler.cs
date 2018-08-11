@@ -11,6 +11,7 @@ namespace ETHotfix
             item.Position = Utility.UnityVector3FromETVector3(message.Position);
             item.Number = message.Number;
             item.Owner = message.Id;
+            item.GameObject.transform.localScale = new UnityEngine.Vector3(2, 2, 2);
         }
 	}
 }

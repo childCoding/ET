@@ -248,4 +248,18 @@
 		int32 RpcId = 90;
 		long ActorId = 94;
 	}
+	
+	message G2G_MatchStartRequest // IRequest
+	{
+		int32 RpcId = 90;
+		int64 PlayerId = 1;
+		int64 GateSessionId = 2;
+	}
+	
+	message G2G_MatchStartResponse // IResponse
+	{
+		int32 RpcId = 90;
+		int32 Error = 91;
+		string Message = 92;
+	}
 }

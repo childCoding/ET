@@ -43,9 +43,9 @@ namespace ETModel
 
 		public void LateUpdate()
 		{
-			// 摄像机每帧更新位置
-			UpdatePosition();
-		}
+            // 摄像机每帧更新位置
+            UpdatePosition();
+        }
 
 		private void UpdatePosition()
 		{
@@ -69,7 +69,7 @@ namespace ETModel
             this.mainCamera.transform.LookAt(targetpos);
         }
         private float m_x = 0;
-        private float m_y = -15;
+        private float m_y = -32.688f;
         private float m_disttance = 2f;
         // 摄像机旋转
         public void UpdateRotation(Vector3 v)

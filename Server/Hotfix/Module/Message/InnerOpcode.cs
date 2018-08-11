@@ -35,5 +35,7 @@ namespace ETHotfix
 		 public const ushort G2M_CreateUnit = 1031;
 		 public const ushort M2G_CreateUnit = 1032;
 		 public const ushort G2M_SessionDisconnect = 1033;
+		 public const ushort G2G_MatchStartRequest = 1034;
+		 public const ushort G2G_MatchStartResponse = 1035;
 	}
 }

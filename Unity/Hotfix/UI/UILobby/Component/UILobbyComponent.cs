@@ -16,7 +16,6 @@ namespace ETHotfix
 	
 	public class UILobbyComponent : Component
 	{
-		private GameObject enterMap;
 		//public Text Text;
 
 		public void Awake()
@@ -32,19 +31,13 @@ namespace ETHotfix
 			//transfer1Btn.GetComponent<Button>().onClick.Add(this.OnTransfer1);
 			//transfer2Btn.GetComponent<Button>().onClick.Add(this.OnTransfer2);
 			
-			enterMap = rc.Get<GameObject>("EnterMap");
-			enterMap.GetComponent<Button>().onClick.Add(this.EnterMap);
+			rc.Get<GameObject>("EnterMap").GetComponent<Button>().onClick.Add(this.EnterMap);
 			//this.Text = rc.Get<GameObject>("Text").GetComponent<Text>();
-            GameObject button = rc.Get<GameObject>("boss");
-            button.GetComponent<Button>().onClick.AddListener(() => { this.ChooseUnitType(0); });
-            button = rc.Get<GameObject>("hero1");
-            button.GetComponent<Button>().onClick.AddListener(() => { this.ChooseUnitType(1); });
-            button = rc.Get<GameObject>("hero2");
-            button.GetComponent<Button>().onClick.AddListener(() => { this.ChooseUnitType(2); });
-            button = rc.Get<GameObject>("hero3");
-            button.GetComponent<Button>().onClick.AddListener(() => { this.ChooseUnitType(3); });
-            button = rc.Get<GameObject>("hero4");
-            button.GetComponent<Button>().onClick.AddListener(() => { this.ChooseUnitType(4); });
+            rc.Get<GameObject>("boss").GetComponent<Button>().onClick.AddListener(() => { this.ChooseUnitType(0); });
+            rc.Get<GameObject>("hero1").GetComponent<Button>().onClick.AddListener(() => { this.ChooseUnitType(1); });
+            rc.Get<GameObject>("hero2").GetComponent<Button>().onClick.AddListener(() => { this.ChooseUnitType(2); });
+            rc.Get<GameObject>("hero3").GetComponent<Button>().onClick.AddListener(() => { this.ChooseUnitType(3); });
+            rc.Get<GameObject>("hero4").GetComponent<Button>().onClick.AddListener(() => { this.ChooseUnitType(4); });
         }
         public void InitPlayer(int index,long id, string account)
         {
@@ -114,7 +107,7 @@ namespace ETHotfix
 
         private void ChooseUnitType(int type)
         {
-            ETModel.SessionComponent.Instance.Session.Send(new C2G_ChooseType() { Type = type });
+            ETModel.SessionComponent.Instance.Session.Send(new C2G_ChooseType() { Id = PlayerComponent.Instance.MyPlayer.Id, Type = type });
         }
          
     }

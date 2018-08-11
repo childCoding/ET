@@ -48,6 +48,11 @@ namespace ETHotfix
                 {
                     unitComponent.GetScore();
                 }
+                MatchComponent matchComponent = Game.Scene.GetComponent<MatchComponent>();
+                if (matchComponent != null)
+                {
+                    matchComponent.Update();
+                }
             }
         }
 

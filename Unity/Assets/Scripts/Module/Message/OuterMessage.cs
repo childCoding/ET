@@ -2249,6 +2249,14 @@ namespace ETModel {
     private static readonly pb::MessageParser<C2G_ChooseType> _parser = new pb::MessageParser<C2G_ChooseType>(() => new C2G_ChooseType());
     public static pb::MessageParser<C2G_ChooseType> Parser { get { return _parser; } }
 
+    private long id_;
+    public long Id {
+      get { return id_; }
+      set {
+        id_ = value;
+      }
+    }
+
     private int type_;
     public int Type {
       get { return type_; }
@@ -2258,14 +2266,21 @@ namespace ETModel {
     }
 
     public void WriteTo(pb::CodedOutputStream output) {
-      if (Type != 0) {
+      if (Id != 0L) {
         output.WriteRawTag(8);
+        output.WriteInt64(Id);
+      }
+      if (Type != 0) {
+        output.WriteRawTag(16);
         output.WriteInt32(Type);
       }
     }
 
     public int CalculateSize() {
       int size = 0;
+      if (Id != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Id);
+      }
       if (Type != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Type);
       }
@@ -2273,6 +2288,7 @@ namespace ETModel {
     }
 
     public void MergeFrom(pb::CodedInputStream input) {
+      id_ = 0;
       type_ = 0;
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
@@ -2281,6 +2297,10 @@ namespace ETModel {
             input.SkipLastField();
             break;
           case 8: {
+            Id = input.ReadInt64();
+            break;
+          }
+          case 16: {
             Type = input.ReadInt32();
             break;
           }
@@ -2455,6 +2475,31 @@ namespace ETModel {
             ActorId = input.ReadInt64();
             break;
           }
+        }
+      }
+    }
+
+  }
+
+  public partial class G2C_PlayerEnterMap : pb::IMessage {
+    private static readonly pb::MessageParser<G2C_PlayerEnterMap> _parser = new pb::MessageParser<G2C_PlayerEnterMap>(() => new G2C_PlayerEnterMap());
+    public static pb::MessageParser<G2C_PlayerEnterMap> Parser { get { return _parser; } }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      return size;
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
         }
       }
     }

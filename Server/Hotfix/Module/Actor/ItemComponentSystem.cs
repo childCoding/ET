@@ -34,14 +34,14 @@ namespace ETHotfix
                     newItem.IsShow = true;
                     newItem.Position = new Vector3((float)scoreConfig.X, (float)scoreConfig.Y, (float)scoreConfig.Z);
                     self.Add(newItem);
+                    Actor_CreateItems actorCreateItems = new Actor_CreateItems();
+                    Item[] items = self.GetAll();
+                    foreach (Item item in items)
+                    {
+                        actorCreateItems.Items.Add(new ItemInformation { Id = item.Id, X = item.Position.X, Y = item.Position.Y, Z = item.Position.Z });
+                    }
+                    MessageHelper.Broadcast(actorCreateItems);
                 }
-                Actor_CreateItems actorCreateItems = new Actor_CreateItems();
-                Item[] items = self.GetAll();
-                foreach (Item item in items)
-                {
-                    actorCreateItems.Items.Add(new ItemInformation { Id = item.Id, X = item.Position.X, Y = item.Position.Y, Z = item.Position.Z });
-                }
-                MessageHelper.Broadcast(actorCreateItems);
             }
         }
 

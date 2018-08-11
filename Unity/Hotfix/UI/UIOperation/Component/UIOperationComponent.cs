@@ -111,7 +111,10 @@ namespace ETHotfix
         // 吐豆子
         private void spit()
         {
-            ETModel.SessionComponent.Instance.Session.Send(new C2G_SpitScore() { Id = this.Unit.Id });
+            if (this.Unit.Score >= 2)
+            {
+                ETModel.SessionComponent.Instance.Session.Send(new C2G_SpitScore() { Id = this.Unit.Id });
+            }
         }
         // 变身
         private void changeBody()
