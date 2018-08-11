@@ -1,4 +1,10 @@
-{ "_id": NumberLong(1), "MinX": 1, "MaxX": 1, "Y": 0.25, "MinZ": 1, "MaxZ": 1 }
-{ "_id": NumberLong(2), "MinX": 4, "MaxX": 6, "Y": 0.25, "MinZ": 4, "MaxZ": 6 }
-{ "_id": NumberLong(3), "MinX": 7, "MaxX": 9, "Y": 0.25, "MinZ": 7, "MaxZ": 9 }
-{ "_id": NumberLong(4), "MinX": 10, "MaxX": 12, "Y": 0.25, "MaxZ": 10, "MaxZ": 12 }
+{"_id":NumberLong(1),"X":0.00,"Y":0.25,"Z":0.00}
+{"_id":NumberLong(2),"X":0.00,"Y":0.25,"Z":0.00}
+{"_id":NumberLong(3),"X":0.00,"Y":0.25,"Z":0.00}
+{"_id":NumberLong(4),"X":0.00,"Y":0.25,"Z":0.00}
+{"_id":NumberLong(5),"X":-8.58,"Y":0.00,"Z":-2.47}
+{"_id":NumberLong(6),"X":-5.93,"Y":0.00,"Z":1.04}
+{"_id":NumberLong(7),"X":6.74,"Y":0.00,"Z":3.93}
+{"_id":NumberLong(8),"X":10.79,"Y":0.00,"Z":3.63}
+{"_id":NumberLong(9),"X":10.67,"Y":0.00,"Z":2.11}
+{"_id":NumberLong(10),"X":10.72,"Y":0.00,"Z":1.21}
