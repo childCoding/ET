@@ -19,7 +19,7 @@ namespace ETHotfix
 	{
 		private InputField account;
 		private GameObject loginBtn;
-
+        public static string[] RandomNames = new string[] { "大斌斌", "小斌斌", "小盼盼", "小小盼", "陈震震", "小震震", "小群群","小小群", "小颖颖", "小小颖" };
 		public void Awake()
 		{
 			ReferenceCollector rc = this.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
@@ -27,6 +27,7 @@ namespace ETHotfix
 			loginBtn.GetComponent<Button>().onClick.Add(OnLogin);
 			this.account = rc.Get<GameObject>("Account").GetComponent<InputField>();
             rc.Get<GameObject>("ResetBtn").GetComponent<Button>().onClick.Add(this.OnReset);
+            rc.Get<GameObject>("Account").GetComponent<InputField>().text = RandomNames[UnityEngine.Random.Range(0, RandomNames.Length)];
         }
 
 		public async void OnLogin()

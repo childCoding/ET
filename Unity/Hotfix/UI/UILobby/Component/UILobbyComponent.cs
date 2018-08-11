@@ -17,7 +17,7 @@ namespace ETHotfix
 	public class UILobbyComponent : Component
 	{
 		private GameObject enterMap;
-		public Text Text;
+		//public Text Text;
 
 		public void Awake()
 		{
@@ -48,7 +48,7 @@ namespace ETHotfix
         }
         public void InitPlayer(int index,long id)
         {
-            if (index > 4)
+            if (index < 0 || index > 4)
                 return;
             var name = index == 0 ? "boss" : ($"hero{index}");
             ReferenceCollector rc = this.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
@@ -60,6 +60,7 @@ namespace ETHotfix
         }
 		private void OnSend()
 		{
+            //PlayerComponent.Instance.MyPlayer.
 			// 发送一个actor消息
 			ETModel.SessionComponent.Instance.Session.Send(new Actor_Test() { Info = "message client->gate->map->gate->client" });
 		}

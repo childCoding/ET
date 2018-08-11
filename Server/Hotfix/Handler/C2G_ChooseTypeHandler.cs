@@ -16,7 +16,8 @@ namespace ETHotfix
                 {
                     return;
                 }
-            } 
+            }
+            curplayer.UnitType = (UnitType)message.Type;
             Actor_HallInformation actorHallInformation = new Actor_HallInformation();
             foreach (Player player in players)
             {

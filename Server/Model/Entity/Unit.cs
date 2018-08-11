@@ -5,6 +5,7 @@ namespace ETModel
 {
 	public enum UnitType
 	{
+        Idler = -1,
 		Weak,
 		Strong1,
         Strong2,
