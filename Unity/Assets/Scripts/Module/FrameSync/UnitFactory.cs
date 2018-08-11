@@ -13,6 +13,7 @@ namespace ETModel
             GameObject prefab = bundleGameObject.Get<GameObject>(fab);
 
             Unit unit = ComponentFactory.CreateWithId<Unit, UnitType>(id, unitType);
+            unit.UnitType = unitType;
             unit.GameObject = UnityEngine.Object.Instantiate(prefab);
             GameObject parent = GameObject.Find($"/Global/Unit");
             unit.GameObject.transform.SetParent(parent.transform, false);

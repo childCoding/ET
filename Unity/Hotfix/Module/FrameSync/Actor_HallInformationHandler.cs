@@ -12,11 +12,11 @@ namespace ETHotfix
 
             for(int i = 0;i < 5;i++)
             {
-                uILobbyComponent.InitPlayer(i, 0);
+                uILobbyComponent.InitPlayer(i, 0, "");
             }
             foreach (PlayerChooseType playerChooseType in message.PlayerChooseType)
             {
-                uILobbyComponent.InitPlayer(playerChooseType.Type, playerChooseType.Id);
+                uILobbyComponent.InitPlayer(playerChooseType.Type, playerChooseType.Id, playerChooseType.Account);
             }
 
         }

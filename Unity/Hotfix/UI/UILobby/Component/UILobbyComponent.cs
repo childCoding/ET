@@ -46,7 +46,7 @@ namespace ETHotfix
             button = rc.Get<GameObject>("hero4");
             button.GetComponent<Button>().onClick.AddListener(() => { this.ChooseUnitType(4); });
         }
-        public void InitPlayer(int index,long id)
+        public void InitPlayer(int index,long id, string account)
         {
             if (index < 0 || index > 4)
                 return;
@@ -54,7 +54,7 @@ namespace ETHotfix
             ReferenceCollector rc = this.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
             GameObject button = rc.Get<GameObject>(name);
             Utility.SearchChildRecurvese(button.transform, "select").gameObject.SetActive(id == 0);
-            Utility.SearchChildRecurvese(button.transform, "Text").gameObject.GetComponent<Text>().text = id > 0 ? id.ToString() : String.Empty;
+            Utility.SearchChildRecurvese(button.transform, "Text").gameObject.GetComponent<Text>().text = id > 0 ? account : String.Empty;
 
 
         }

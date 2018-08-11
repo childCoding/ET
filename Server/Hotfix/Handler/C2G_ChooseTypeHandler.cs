@@ -21,7 +21,7 @@ namespace ETHotfix
             Actor_HallInformation actorHallInformation = new Actor_HallInformation();
             foreach (Player player in players)
             {
-                actorHallInformation.PlayerChooseType.Add(new PlayerChooseType { Id = player.Id, Type = (int)player.UnitType });
+                actorHallInformation.PlayerChooseType.Add(new PlayerChooseType { Id = player.Id, Account = player.Account, Type = (int)player.UnitType });
             }
             MessageHelper.BroadcastByPlayer(actorHallInformation);
         }

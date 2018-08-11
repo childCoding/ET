@@ -1979,15 +1979,71 @@ namespace ETModel {
   /// <summary>
   /// 吐积分
   /// </summary>
-  public partial class Frame_SpitScore : pb::IMessage {
-    private static readonly pb::MessageParser<Frame_SpitScore> _parser = new pb::MessageParser<Frame_SpitScore>(() => new Frame_SpitScore());
-    public static pb::MessageParser<Frame_SpitScore> Parser { get { return _parser; } }
+  public partial class C2G_SpitScore : pb::IMessage {
+    private static readonly pb::MessageParser<C2G_SpitScore> _parser = new pb::MessageParser<C2G_SpitScore>(() => new C2G_SpitScore());
+    public static pb::MessageParser<C2G_SpitScore> Parser { get { return _parser; } }
+
+    private long id_;
+    public long Id {
+      get { return id_; }
+      set {
+        id_ = value;
+      }
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Id != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(Id);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      if (Id != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Id);
+      }
+      return size;
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      id_ = 0;
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            Id = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  /// 吐积分
+  /// </summary>
+  public partial class Actor_SpitScore : pb::IMessage {
+    private static readonly pb::MessageParser<Actor_SpitScore> _parser = new pb::MessageParser<Actor_SpitScore>(() => new Actor_SpitScore());
+    public static pb::MessageParser<Actor_SpitScore> Parser { get { return _parser; } }
 
     private int rpcId_;
     public int RpcId {
       get { return rpcId_; }
       set {
         rpcId_ = value;
+      }
+    }
+
+    private long actorId_;
+    public long ActorId {
+      get { return actorId_; }
+      set {
+        actorId_ = value;
       }
     }
 
@@ -1999,6 +2055,14 @@ namespace ETModel {
       }
     }
 
+    private long itemId_;
+    public long ItemId {
+      get { return itemId_; }
+      set {
+        itemId_ = value;
+      }
+    }
+
     private global::ETModel.vector3 position_;
     public global::ETModel.vector3 Position {
       get { return position_; }
@@ -2007,18 +2071,38 @@ namespace ETModel {
       }
     }
 
+    private int number_;
+    public int Number {
+      get { return number_; }
+      set {
+        number_ = value;
+      }
+    }
+
     public void WriteTo(pb::CodedOutputStream output) {
+      if (Id != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(Id);
+      }
+      if (ItemId != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(ItemId);
+      }
       if (position_ != null) {
-        output.WriteRawTag(10);
+        output.WriteRawTag(26);
         output.WriteMessage(Position);
+      }
+      if (Number != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(Number);
       }
       if (RpcId != 0) {
         output.WriteRawTag(208, 5);
         output.WriteInt32(RpcId);
       }
-      if (Id != 0L) {
-        output.WriteRawTag(240, 5);
-        output.WriteInt64(Id);
+      if (ActorId != 0L) {
+        output.WriteRawTag(232, 5);
+        output.WriteInt64(ActorId);
       }
     }
 
@@ -2027,37 +2111,61 @@ namespace ETModel {
       if (RpcId != 0) {
         size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
       }
+      if (ActorId != 0L) {
+        size += 2 + pb::CodedOutputStream.ComputeInt64Size(ActorId);
+      }
       if (Id != 0L) {
-        size += 2 + pb::CodedOutputStream.ComputeInt64Size(Id);
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(Id);
+      }
+      if (ItemId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(ItemId);
       }
       if (position_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Position);
+      }
+      if (Number != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Number);
       }
       return size;
     }
 
     public void MergeFrom(pb::CodedInputStream input) {
-      rpcId_ = 0;
       id_ = 0;
+      itemId_ = 0;
+      number_ = 0;
+      rpcId_ = 0;
+      actorId_ = 0;
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
         switch(tag) {
           default:
             input.SkipLastField();
             break;
-          case 10: {
+          case 8: {
+            Id = input.ReadInt64();
+            break;
+          }
+          case 16: {
+            ItemId = input.ReadInt64();
+            break;
+          }
+          case 26: {
             if (position_ == null) {
               position_ = new global::ETModel.vector3();
             }
             input.ReadMessage(position_);
             break;
           }
+          case 32: {
+            Number = input.ReadInt32();
+            break;
+          }
           case 720: {
             RpcId = input.ReadInt32();
             break;
           }
-          case 752: {
-            Id = input.ReadInt64();
+          case 744: {
+            ActorId = input.ReadInt64();
             break;
           }
         }
@@ -2197,6 +2305,14 @@ namespace ETModel {
       }
     }
 
+    private string account_ = "";
+    public string Account {
+      get { return account_; }
+      set {
+        account_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     private int type_;
     public int Type {
       get { return type_; }
@@ -2210,8 +2326,12 @@ namespace ETModel {
         output.WriteRawTag(8);
         output.WriteInt64(Id);
       }
+      if (Account.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Account);
+      }
       if (Type != 0) {
-        output.WriteRawTag(16);
+        output.WriteRawTag(24);
         output.WriteInt32(Type);
       }
     }
@@ -2221,6 +2341,9 @@ namespace ETModel {
       if (Id != 0L) {
         size += 1 + pb::CodedOutputStream.ComputeInt64Size(Id);
       }
+      if (Account.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Account);
+      }
       if (Type != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Type);
       }
@@ -2229,6 +2352,7 @@ namespace ETModel {
 
     public void MergeFrom(pb::CodedInputStream input) {
       id_ = 0;
+      account_ = "";
       type_ = 0;
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
@@ -2240,7 +2364,11 @@ namespace ETModel {
             Id = input.ReadInt64();
             break;
           }
-          case 16: {
+          case 18: {
+            Account = input.ReadString();
+            break;
+          }
+          case 24: {
             Type = input.ReadInt32();
             break;
           }

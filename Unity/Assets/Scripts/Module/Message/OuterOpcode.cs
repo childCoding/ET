@@ -68,8 +68,12 @@ namespace ETModel
 	public partial class Actor_MatchInformation : IActorMessage {}
 
 // 吐积分
-	[Message(OuterOpcode.Frame_SpitScore)]
-	public partial class Frame_SpitScore : IFrameMessage {}
+	[Message(OuterOpcode.C2G_SpitScore)]
+	public partial class C2G_SpitScore : IMessage {}
+
+// 吐积分
+	[Message(OuterOpcode.Actor_SpitScore)]
+	public partial class Actor_SpitScore : IActorMessage {}
 
 // 冲刺技能
 	[Message(OuterOpcode.Frame_Sprint)]
@@ -113,10 +117,11 @@ namespace ETModel
 		 public const ushort Actor_CreateItems = 119;
 		 public const ushort Actor_RemoveItems = 120;
 		 public const ushort Actor_MatchInformation = 121;
-		 public const ushort Frame_SpitScore = 122;
-		 public const ushort Frame_Sprint = 123;
-		 public const ushort C2G_ChooseType = 124;
-		 public const ushort PlayerChooseType = 125;
-		 public const ushort Actor_HallInformation = 126;
+		 public const ushort C2G_SpitScore = 122;
+		 public const ushort Actor_SpitScore = 123;
+		 public const ushort Frame_Sprint = 124;
+		 public const ushort C2G_ChooseType = 125;
+		 public const ushort PlayerChooseType = 126;
+		 public const ushort Actor_HallInformation = 127;
 	}
 }

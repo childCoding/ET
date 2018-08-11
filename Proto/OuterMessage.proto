@@ -158,11 +158,20 @@ message Actor_MatchInformation // IActorMessage
 }
 
 // 吐积分
-message Frame_SpitScore // IFrameMessage
+message C2G_SpitScore // IMessage
+{
+	int64 Id = 1;
+}
+
+// 吐积分
+message Actor_SpitScore // IActorMessage
 {
 	int32 RpcId = 90;
-	int64 Id = 94;
-	vector3 position = 1;
+	int64 ActorId = 93;
+	int64 Id = 1;
+	int64 ItemId = 2;
+	vector3 Position = 3;
+	int32 Number = 4;
 }
 
 // 冲刺技能
@@ -182,7 +191,8 @@ message C2G_ChooseType // IMessage
 message PlayerChooseType
 {
 	int64 Id = 1;
-	int32 Type = 2;
+	string Account = 2;
+	int32 Type = 3;
 }
 
 // 大厅信息

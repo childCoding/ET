@@ -13,7 +13,15 @@ namespace ETHotfix
                 Item item = itemComponent.Get(id);
                 if (item != null)
                 {
-                    item.GameObject.SetActive(false);
+                    if (item.Owner != 0)
+                    {
+                        item.Dispose();
+                        itemComponent.Remove(id);
+                    }
+                    else
+                    {
+                        item.GameObject.SetActive(false);
+                    }
                 }
             }
         }

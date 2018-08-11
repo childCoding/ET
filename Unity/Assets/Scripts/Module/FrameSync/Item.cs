@@ -5,6 +5,10 @@ namespace ETModel
 	public sealed class Item: Entity
 	{
 		public GameObject GameObject;
+        // 归属
+        public long Owner { get; set; }
+        // 数量
+        public int Number { get; set; }
 		
 		public void Awake()
 		{

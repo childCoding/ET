@@ -55,12 +55,22 @@ namespace ETHotfix
                 foreach (Unit unit in units)
                 {
                     Vector3 vector = unit.Position - item.Position;
-                    if (vector.Length() < 1 && unit.UnitType == UnitType.Weak)
+                    if (vector.Length() < 1)
                     {
-                        unit.Score++;
-                        actorRemoveItems.Id.Add(item.Id);
-                        self.Remove(item.Id);
-                        break;
+                        if (unit.UnitType == UnitType.Weak && item.Owner == 0)
+                        {
+                            unit.Score++;
+                            actorRemoveItems.Id.Add(item.Id);
+                            self.Remove(item.Id);
+                            break;
+                        }
+                        else if (unit.UnitType != UnitType.Weak && item.Owner != 0)
+                        {
+                            unit.Score++;
+                            actorRemoveItems.Id.Add(item.Id);
+                            self.Remove(item.Id);
+                            break;
+                        }
                     }
                 }
             }

@@ -5,9 +5,13 @@ namespace ETModel
 {
     public sealed class Item: Entity
 	{
-        public bool IsShow { get; set; }
+        public bool IsShow { get; set; } = true;
 		[BsonIgnore]
 		public Vector3 Position { get; set; }
+        // 归属
+        public long Owner { get; set; }
+        // 数量
+        public int Number { get; set; }
 
 		public override void Dispose()
 		{

@@ -23,10 +23,6 @@ namespace ETModel
         // 类型
         public UnitType UnitType { get; set; }
 		
-		public void Awake(UnitType unitType)
-		{
-            this.UnitType = unitType;
-		}
         public Transform Transform {
             get { return GameObject.transform; }
             private set {}

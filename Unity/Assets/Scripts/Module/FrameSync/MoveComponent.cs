@@ -89,7 +89,7 @@ namespace ETModel
 
 
 			Unit unit = this.GetParent<Unit>();
-			Vector3 moveVector3 = this.m_Speed * Time.deltaTime;
+			Vector3 moveVector3 = this.MainSpeed * Time.deltaTime;
 
             moveVector3 += animatorComponent.Animator ? animatorComponent.Animator.deltaPosition:Vector3.zero;
             if (!characterComponent.isGrounded)
