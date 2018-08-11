@@ -8,9 +8,16 @@ namespace ETHotfix
     {
         protected override void Run(Session session, C2G_ChooseType message)
         {
-            session.GetComponent<SessionPlayerComponent>().Player.UnitType = (UnitType)message.Type;
-            Actor_HallInformation actorHallInformation = new Actor_HallInformation();
+            var curplayer = session.GetComponent<SessionPlayerComponent>().Player;
             Player[] players = Game.Scene.GetComponent<PlayerComponent>().GetAll();
+            for(int i=0;i<players.Length;i++)
+            {
+                if( players[i].UnitType == (UnitType)message.Type && players[i].Id != curplayer.Id)
+                {
+                    return;
+                }
+            } 
+            Actor_HallInformation actorHallInformation = new Actor_HallInformation();
             foreach (Player player in players)
             {
                 actorHallInformation.PlayerChooseType.Add(new PlayerChooseType { Id = player.Id, Type = (int)player.UnitType });

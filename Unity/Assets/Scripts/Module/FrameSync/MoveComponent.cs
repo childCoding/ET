@@ -63,39 +63,17 @@ namespace ETModel
 		{
 			get
 			{
-				Speed speed;
-				if (!this.speeds.TryGetValue(this.mainSpeed, out speed))
-				{
-					speed = new Speed(this.mainSpeed);
-					this.speeds.Add(speed.Id, speed);
-				}
-				return speed.Value;
+				return m_Speed;
 			}
 			set
 			{
-				Speed speed;
-				if (!this.speeds.TryGetValue(this.mainSpeed, out speed))
-				{
-					speed = new Speed(this.mainSpeed);
-					this.speeds.Add(speed.Id, speed);
-				}
-				speed.Value = value;
-				animatorComponent?.SetFloatValue("Speed", speed.Value.magnitude);
+                m_Speed = value;
+				animatorComponent?.SetFloatValue("Speed", m_Speed.magnitude);
 			}
 		}
 
-		public Vector3 Speed
-		{
-			get
-			{
-				Vector3 speed = new Vector3();
-				foreach (Speed sp in this.speeds.Values)
-				{
-					speed += sp.Value;
-				}
-				return speed;
-			}
-		}
+        public Vector3 m_Speed;
+ 
 
 		public void Awake()
 		{ 
@@ -109,29 +87,10 @@ namespace ETModel
 		{
 			UpdateTurn();
 
-			//if (this.IsArrived)
-			//{
-			//	return;
-			//}
-
-			//if (this.Speed == Vector3.zero)
-			//{
-			//	return;
-			//}
 
 			Unit unit = this.GetParent<Unit>();
-			Vector3 moveVector3 = this.Speed * Time.deltaTime;
+			Vector3 moveVector3 = this.m_Speed * Time.deltaTime;
 
-            //if (this.hasDest)
-            //{
-            //	float dist = (this.Dest - unit.Position).magnitude;
-            //	if (moveVector3.magnitude >= dist || dist < 0.1f)
-            //	{
-            //		unit.Position = this.Dest;
-            //		this.IsArrived = true;
-            //		return;
-            //	}
-            //}
             moveVector3 += animatorComponent.Animator ? animatorComponent.Animator.deltaPosition:Vector3.zero;
             if (!characterComponent.isGrounded)
             {
@@ -189,21 +148,14 @@ namespace ETModel
 			return speed.Id;
 		}
 
-		public Speed GetSpeed(long id)
+		public Vector3 GetSpeed(long id)
 		{
-			Speed speed;
-			this.speeds.TryGetValue(id, out speed);
-			return speed;
+			return m_Speed;
 		}
 
 		public void RemoveSpeed(long id)
 		{
-			Speed speed;
-			if (!this.speeds.TryGetValue(id, out speed))
-			{
-				return;
-			}
-			this.speeds.Remove(id);
+
 		}
 
 		/// <summary>
@@ -211,16 +163,26 @@ namespace ETModel
 		/// </summary>
 		public void Stop()
 		{
-			this.speeds.Clear();
+			this.m_Speed = Vector3.zero;
 			this.animatorComponent?.SetFloatValue("Speed", 0);
             //this.animatorComponent?.Play(MotionType.Idle);
             UnitState = State.Idle;
         }
-
-		/// <summary>
-		/// 改变Unit的朝向
-		/// </summary>
-		public void Turn2D(Vector3 dir, float turnTime = 0.1f)
+        /// <summary>
+        /// 停止移动Unit,只停止地面正常移动,不停止击飞等移动
+        /// </summary>
+        public void Jump()
+        {
+            MainSpeed += Vector3.up * 20;
+            //this.speeds.Clear();
+            //this.animatorComponent?.SetFloatValue("Speed", 0);
+            //this.animatorComponent?.Play(MotionType.Idle);
+            //UnitState = State.Moving;
+        }
+        /// <summary>
+        /// 改变Unit的朝向
+        /// </summary>
+        public void Turn2D(Vector3 dir, float turnTime = 0.1f)
 		{
 			Vector3 nexpos = this.GetParent<Unit>().GameObject.transform.position + dir;
 			Turn(nexpos, turnTime);

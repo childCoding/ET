@@ -20,7 +20,31 @@ namespace ETModel
             unit.AddComponent<MoveComponent>();
             unit.AddComponent<BoneComponent>();
             Game.Scene.GetComponent<UnitComponent>().Add(unit);
+            InitColor(unit.GameObject,GetColor(unitType));
             return unit;
+        }
+
+        public static void InitColor(GameObject go,Color clr)
+        {
+            var render = go.GetComponentInChildren<SkinnedMeshRenderer>();
+            if(render)
+            {
+                MaterialPropertyBlock block = new MaterialPropertyBlock();
+                block.SetColor("_Color", clr);
+                render.SetPropertyBlock(block);
+            }
+            
+        }
+        public static Color32 GetColor(UnitType t)
+        {
+            switch (t)
+            {
+                case UnitType.Strong1:return Color.green;
+                case UnitType.Strong2:return Color.red;
+                case UnitType.Strong3:return Color.blue;
+                case UnitType.Strong4: return Color.yellow;
+                default:return Color.white;
+            }
         }
     }
 }
