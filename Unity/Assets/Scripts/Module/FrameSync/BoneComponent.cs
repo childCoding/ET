@@ -15,7 +15,7 @@ namespace ETModel
 	public class BoneComponent : Component
 	{
         private enum BoneType{ LeftHandler, RightHandler, LeftFooter, RightFooter, Spine , LeftWeapon, RightWeapon }
-        private static string[] Bones = new string[]{ "Bip001 L Hand", "Bip001 R Hand", "Bip001 L Foot", "Bip001 R Foot", "Bip001 Spine1", "Bip001 Prop1" , "Bip001 Prop1" };
+        private static string[] Bones = new string[]{ "Bone006", "Bone013", "Bip001 L Foot", "Bip001 R Foot", "Bip001 Spine1", "Bone007", "Bone014" };
 
         public GameObject GRootBone { get { return gRootBone; } private set { } }
         private GameObject gRootBone;

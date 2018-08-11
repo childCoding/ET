@@ -43,6 +43,15 @@ namespace ETModel
 	[Message(OuterOpcode.Frame_UnitSkillCastItem)]
 	public partial class Frame_UnitSkillCastItem : IFrameMessage {}
 
+	[Message(OuterOpcode.Frame_UnitDragUnit)]
+	public partial class Frame_UnitDragUnit : IFrameMessage {}
+
+	[Message(OuterOpcode.Frame_UnitKickUnit)]
+	public partial class Frame_UnitKickUnit : IFrameMessage {}
+
+	[Message(OuterOpcode.Frame_UnitReliveUnit)]
+	public partial class Frame_UnitReliveUnit : IFrameMessage {}
+
 	[Message(OuterOpcode.C2R_Ping)]
 	public partial class C2R_Ping : IRequest {}
 
@@ -113,19 +122,22 @@ namespace ETModel
 		 public const ushort Frame_UnitMoveStop = 112;
 		 public const ushort Frame_UnitRotation = 113;
 		 public const ushort Frame_UnitSkillCastItem = 114;
-		 public const ushort C2R_Ping = 115;
-		 public const ushort R2C_Ping = 116;
-		 public const ushort G2C_Test = 117;
-		 public const ushort ItemInformation = 118;
-		 public const ushort Actor_CreateItems = 119;
-		 public const ushort Actor_RemoveItems = 120;
-		 public const ushort Actor_MatchInformation = 121;
-		 public const ushort C2G_SpitScore = 122;
-		 public const ushort Actor_SpitScore = 123;
-		 public const ushort Frame_Sprint = 124;
-		 public const ushort C2G_ChooseType = 125;
-		 public const ushort PlayerChooseType = 126;
-		 public const ushort Actor_HallInformation = 127;
+		 public const ushort Frame_UnitDragUnit = 115;
+		 public const ushort Frame_UnitKickUnit = 116;
+		 public const ushort Frame_UnitReliveUnit = 117;
+		 public const ushort C2R_Ping = 118;
+		 public const ushort R2C_Ping = 119;
+		 public const ushort G2C_Test = 120;
+		 public const ushort ItemInformation = 121;
+		 public const ushort Actor_CreateItems = 122;
+		 public const ushort Actor_RemoveItems = 123;
+		 public const ushort Actor_MatchInformation = 124;
+		 public const ushort C2G_SpitScore = 125;
+		 public const ushort Actor_SpitScore = 126;
+		 public const ushort Frame_Sprint = 127;
+		 public const ushort C2G_ChooseType = 128;
+		 public const ushort PlayerChooseType = 129;
+		 public const ushort Actor_HallInformation = 130;
 		 public const ushort G2C_PlayerEnterMap = 128;
 	}
 }

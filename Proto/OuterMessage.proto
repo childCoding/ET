@@ -105,7 +105,25 @@ message Frame_UnitSkillCastItem 	// IFrameMessage
 	int64 Id = 94;
 	int32 Index = 1;
 }
-
+message Frame_UnitDragUnit 	// IFrameMessage
+{
+	int32 RpcId = 90;
+	int64 Id = 94;
+	int64 otherId = 1;
+}
+message Frame_UnitKickUnit 	// IFrameMessage
+{
+	int32 RpcId = 90;
+	int64 Id = 94;
+	int64 otherId = 1;
+	ETModel.vector3 dir = 2;
+}
+message Frame_UnitReliveUnit 	// IFrameMessage
+{
+	int32 RpcId = 90;
+	int64 Id = 94;
+	int64 otherId = 1;
+}
 message C2R_Ping // IRequest
 {
 	int32 RpcId = 90;

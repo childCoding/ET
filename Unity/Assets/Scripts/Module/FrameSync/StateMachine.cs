@@ -18,7 +18,8 @@ namespace ETModel
 
         }
         public override StateMachineComponent.States Update() {
-
+            if (Entity.ByCastTrigger)
+                return StateMachineComponent.States.ByCast;
             if (Entity.JumpTrigger)
                 return StateMachineComponent.States.Jump;
             if (Entity.DashTrigger)
@@ -56,19 +57,24 @@ namespace ETModel
                 return StateMachineComponent.States.Fall;
             return ID;
         }
-        public override void Enter(IState<MoveComponent> next) {  t = 0; }
+        public override void Enter(IState<MoveComponent> next) {  t = 0; Entity.PlayAnimation("Run"); }
         public override void Leave(IState<MoveComponent> Per) { }
     }
     public class Idle : IState<MoveComponent>
     {
         public Idle(MoveComponent entity) : base(entity, StateMachineComponent.States.Idle) { }
         public override StateMachineComponent.States Update() {
+            if (Entity.ByCastTrigger)
+                return StateMachineComponent.States.ByCast;
             if (Entity.JumpTrigger)
                 return StateMachineComponent.States.Jump;
             if (Entity.DashTrigger)
                 return StateMachineComponent.States.DashMove;
             if (Entity.IsNeedMove())
                 return StateMachineComponent.States.Move;
+            if (Entity.HelpTrigger)
+                return StateMachineComponent.States.Help;
+
             return ID;
         }
         public override void Enter(IState<MoveComponent> next) {
@@ -123,6 +129,8 @@ namespace ETModel
         public override StateMachineComponent.States Update()
         {
             t += Time.deltaTime;
+            if (Entity.ByCastTrigger)
+                return StateMachineComponent.States.ByCast;
             if (Entity.JumpTrigger)
                 return StateMachineComponent.States.Jump;
             //if (Entity.DashTrigger)
@@ -144,8 +152,155 @@ namespace ETModel
             Entity.PlayAnimation("Run");
             Entity.SetAnimationSpeed(Entity.DashMoveAnimationSpeed);
         }
-        public override void Leave(IState<MoveComponent> Per) {
+        public override void Leave(IState<MoveComponent> Per)
+        {
             Entity.SetAnimationSpeed(1);
+        }
+    }
+    public class Death : IState<MoveComponent>
+    {
+        private float t = 0;
+        public Death(MoveComponent entity) : base(entity, StateMachineComponent.States.Death)
+        {
+
+        }
+        public override StateMachineComponent.States Update()
+        {
+            if (Entity.ReliveTrigger)
+                return StateMachineComponent.States.Idle;
+            return ID;
+        }
+        public override void Enter(IState<MoveComponent> next)
+        {
+            Entity.PlayAnimation(ID.ToString());
+        }
+        public override void Leave(IState<MoveComponent> Per)
+        {
+        }
+    }
+    public class Drag : IState<MoveComponent>
+    {
+        public Drag(MoveComponent entity) : base(entity, StateMachineComponent.States.Drag)
+        {
+
+        }
+        public override StateMachineComponent.States Update()
+        {
+            if (Entity.CastTrigger)
+                return StateMachineComponent.States.Cast;
+
+            return ID;
+        }
+        public override void Enter(IState<MoveComponent> next)
+        {
+            Entity.PlayAnimation(ID.ToString());
+        }
+        public override void Leave(IState<MoveComponent> Per)
+        {
+        }
+    }
+    public class ByDrag : IState<MoveComponent>
+    {
+        public ByDrag(MoveComponent entity) : base(entity, StateMachineComponent.States.ByDrag)
+        {
+
+        }
+        public override StateMachineComponent.States Update()
+        {
+            return ID;
+        }
+        public override void Enter(IState<MoveComponent> next)
+        {
+            Entity.PlayAnimation(ID.ToString());
+        }
+        public override void Leave(IState<MoveComponent> Per)
+        {
+        }
+    }
+    public class Cast : IState<MoveComponent>
+    {
+        public Cast(MoveComponent entity) : base(entity, StateMachineComponent.States.Cast)
+        {
+
+        }
+        public override StateMachineComponent.States Update()
+        {
+            return ID;
+        }
+        public override void Enter(IState<MoveComponent> next)
+        {
+            Entity.PlayAnimation(ID.ToString());
+        }
+        public override void Leave(IState<MoveComponent> Per)
+        {
+        }
+    }
+    public class ByCast : IState<MoveComponent>
+    {
+        private float t = 0;
+        private float v = 0;
+        private Vector3 dir = Vector3.zero;
+        public ByCast(MoveComponent entity) : base(entity, StateMachineComponent.States.ByCast)
+        {
+
+        }
+        public override StateMachineComponent.States Update()
+        {
+            t += Time.deltaTime;
+            var vv = dir * Entity.ByCastSpeed * Time.deltaTime;
+            Entity.SetMotion(vv.x, vv.z);
+
+            v += Entity.Gravity * Time.deltaTime;
+            Entity.SetMotion(v);
+            if (t > 1.0f && Entity.IsOnGround())
+                return StateMachineComponent.States.Death;
+            return ID;
+        }
+        public override void Enter(IState<MoveComponent> next)
+        {
+            t = 0;
+            dir = Entity.ByCastDirection;
+            dir.y = 0;dir.Normalize();
+            v = 0.1f;
+            Entity.PlayAnimation("Run");
+        }
+        public override void Leave(IState<MoveComponent> Per)
+        {
+            Entity.ByCastDirection = Vector3.zero;
+            Entity.SetMotion(Vector3.zero);
+        }
+    }
+    public class Help : IState<MoveComponent>
+    {
+        private float t = 0;
+        public Help(MoveComponent entity) : base(entity, StateMachineComponent.States.Help)
+        {
+
+        }
+        public override StateMachineComponent.States Update()
+        {
+            t += Time.deltaTime;
+            if (t > Entity.HelpDurationTime)
+                return StateMachineComponent.States.Idle;
+
+            if (Entity.ByCastTrigger)
+                return StateMachineComponent.States.ByCast;
+            if (Entity.IsNeedMove())
+                return StateMachineComponent.States.Move;
+            return ID;
+        }
+        public override void Enter(IState<MoveComponent> next)
+        {
+            t = 0;
+            Entity.PlayAnimation(ID.ToString());
+        }
+        public override void Leave(IState<MoveComponent> Per)
+        {
+            if (t > Entity.HelpDurationTime)
+            {
+                ETModel.SessionComponent.Instance.Session.Send(new Frame_UnitReliveUnit() { OtherId = Entity.HelpUnitID });
+            }
+            Entity.HelpUnitID = 0;
         }
     }
 }

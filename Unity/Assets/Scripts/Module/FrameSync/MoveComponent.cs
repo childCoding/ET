@@ -21,21 +21,6 @@ namespace ETModel
 		}
 	}
 
-	public class Speed
-	{
-		public long Id;
-
-		public Vector3 Value;
-
-		public Speed()
-		{
-		}
-
-		public Speed(long id)
-		{
-			this.Id = id;
-		}
-	}
 
 	public class MoveComponent : Component
 	{
@@ -43,19 +28,46 @@ namespace ETModel
         //private State UnitState = State.Idle;
 		private AnimatorComponent animatorComponent;
         private CharacterController characterComponent;
+        private StateMachineComponent stateMachineComponent;
+        private bool m_CanControl = true;
+        public bool CanControl {
+            get {
+                if (stateMachineComponent == null)
+                    stateMachineComponent = GetParent<Unit>().GetComponent<StateMachineComponent>();
+                if (stateMachineComponent.curState.ID == StateMachineComponent.States.ByCast ||
+                    stateMachineComponent.curState.ID == StateMachineComponent.States.ByDrag ||
+                    stateMachineComponent.curState.ID == StateMachineComponent.States.Death  )
+                    return false;
+                return m_CanControl;
+            }
+        }
 
-        public bool CanControl = true;
+        public bool DragTrigger = false;
+        public bool ByDragTrigger = false;
+
+        public bool CastTrigger = false;
+        public bool ByCastTrigger = false;
+        public Vector3 ByCastDirection = Vector3.zero;
+        public float ByCastSpeed = 8.0f;
 
         public bool JumpTrigger = false;
         public bool DashTrigger = false;
 
         public float Gravity = -0.5f;
-        public float JumpSpeed = 0.2f;
+        public float JumpSpeed = 0.1f;
         public float MoveSpeed = 2.0f;
 
         public float DashMoveSpeed = 8.0f;
         public float DashMoveAnimationSpeed = 4.0f;
         public float DashMoveDurationTime = 3.0f;
+
+        public bool ReliveTrigger = false;
+
+        public bool HelpTrigger = false;
+        public long HelpUnitID = 0;
+        public long HelpDurationTime = 5;
+
+
         public Vector3 Direction { get { return this.GetParent<Unit>().Transform.forward; } }
         public Vector3 Position = Vector3.zero;
         public Vector3 Dest = Vector3.zero;
@@ -168,13 +180,12 @@ namespace ETModel
 
 		public void MoveToDir(Vector3 dir)
 		{
+            if (!CanControl)
+                return;
+
             Turn2D(dir);
             Dest = Position + dir * 5f;
 
-            this.IsArrived = false;
-			this.hasDest = false;
-			this.MainSpeed = dir;
-            //UnitState = State.Moving;
         }
 
 
@@ -183,23 +194,25 @@ namespace ETModel
 		/// </summary>
 		public void Stop()
 		{
+            if (!CanControl)
+                return;
             Dest = Position;
 
-			this.m_Speed = Vector3.zero;
-			this.animatorComponent?.SetFloatValue("Speed", 0);
-            //this.animatorComponent?.Play(MotionType.Idle);
-            //UnitState = State.Idle;
         }
         /// <summary>
         /// 停止移动Unit,只停止地面正常移动,不停止击飞等移动
         /// </summary>
         public void Jump()
         {
+            if (!CanControl)
+                return;
             JumpTrigger = true;
         }
 
         public void DashMove()
         {
+            if (!CanControl)
+                return;
             DashTrigger = true;
             Dest = Position + Direction * 2;
         }
@@ -291,10 +304,34 @@ namespace ETModel
             Unit unit = this.GetParent<Unit>();
             if (unit != other && other != null)
             {
-                var leftweapone = unit.GetComponent<BoneComponent>().TLeftWeapon;
+                var leftweapone = unit.GetComponent<BoneComponent>().TRightWeapon;
                 other.GameObject.transform.SetParent(leftweapone);
                 other.GameObject.transform.localPosition = Vector3.zero;
+                AttachObject = unit;
+                DragTrigger = true;
             }
+        }
+        private Unit AttachObject = null;
+        public void Cast()
+        {
+            if(AttachObject!= null)
+            {
+                ETModel.SessionComponent.Instance.Session.Send(new Frame_UnitSkillCastItem() { Index = 8 });
+            }
+        }
+        public void ByCast(Vector3 dir)
+        {
+            ByCastTrigger = true;
+            ByCastDirection = dir;
+        }
+        public void HelpUnit(long id)
+        {
+            HelpTrigger = true;
+            HelpUnitID = id;
+        }
+        public void Relive()
+        {
+            ReliveTrigger = true;
         }
         //private 
         //public bool IsByDrag { get { return UnitState == State.ByDrag; } }

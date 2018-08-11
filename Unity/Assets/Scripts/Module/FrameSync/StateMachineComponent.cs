@@ -23,10 +23,13 @@ namespace ETModel
 
 	public class StateMachineComponent : Component
 	{
-        public enum States { Idle ,Move,Jump,Fall,Attack, DashMove }
-        public Dictionary<States, IState<MoveComponent>> states = new Dictionary<States, IState<MoveComponent>>();
+        public enum States { Idle ,Move,Jump,Fall,Attack, DashMove,Death,Cast,ByCast, Drag, ByDrag,Help }
+        private Dictionary<States, IState<MoveComponent>> states = new Dictionary<States, IState<MoveComponent>>();
         public IState<MoveComponent> curState = null;
-        public MoveComponent moveComponent = null;
+        private MoveComponent moveComponent = null;
+
+        public bool IsDeath { get { return curState.ID == States.Death; } }
+
 		public void Awake()
 		{
             moveComponent = GetParent<Unit>().GetComponent<MoveComponent>();
@@ -36,13 +39,22 @@ namespace ETModel
             states[States.Fall] = new Fall(moveComponent);
             states[States.Attack] = new Attack(moveComponent);
             states[States.DashMove] = new DashMove(moveComponent);
+            states[States.Death] = new Death(moveComponent);
+            states[States.Cast] = new Cast(moveComponent);
+            states[States.ByCast] = new ByCast(moveComponent);
+            states[States.Drag] = new Drag(moveComponent);
+            states[States.ByDrag] = new ByDrag(moveComponent);
+            states[States.Help] = new Help(moveComponent);
+
             curState = states[States.Idle];
             
         }
 
 		public void Update()
 		{
-            if (curState.ID != States.Jump && curState.ID != States.Fall)
+            if (curState.ID != States.Jump &&
+                curState.ID != States.ByCast &&
+                curState.ID != States.Fall)
                 moveComponent.SetMotion(-1);
 
             if (curState != null)
@@ -57,8 +69,27 @@ namespace ETModel
             }
             moveComponent.JumpTrigger = false;
             moveComponent.DashTrigger = false;
-        }
+            moveComponent.CastTrigger = false;
+            moveComponent.ByDragTrigger = false; 
+            moveComponent.ByCastTrigger = false;
+            moveComponent.DragTrigger = false;
+            moveComponent.HelpTrigger = false;
+            moveComponent.ReliveTrigger = false;
 
+        }
+        public void ChangeState(States id)
+        {
+            curState.Leave(states[id]);
+            states[id].Enter(curState);
+            curState = states[id];
+        }
+        public void Relive()
+        {
+            if(curState.ID == States.Death)
+            {
+                ChangeState(States.Idle);
+            }
+        }
         public void Drag(Unit attach)
         {
             if(attach != null)

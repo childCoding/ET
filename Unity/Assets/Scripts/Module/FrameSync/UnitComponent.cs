@@ -43,15 +43,50 @@ namespace ETModel
 
 			Instance = null;
 		}
-
+        public long nearDeathUnitId()
+        {
+            long id = 0;
+            var me = UnitComponent.Instance.MyUnit;
+            var units = UnitComponent.Instance.GetAll();
+            foreach (var u in units)
+            {
+                if (u.GetComponent<StateMachineComponent>().IsDeath)
+                {
+                    var dir = me.Position - u.Position;
+                    if (dir.magnitude < 1f)
+                    {
+                        id = u.Id;
+                    }
+                }
+            }
+            return id;
+        }
 		public void Add(Unit unit)
 		{
 			this.idUnits.Add(unit.Id, unit);
 		}
-        public Unit GetAround(Vector3 pos,float distance)
+        public Unit GetForwardUnit(Vector3 pos, float distance, Unit self)
+        {
+            foreach (var kv in idUnits)
+            {
+                if (kv.Value.UnitType == UnitType.Weak || kv.Value.Id == self.Id)
+                    continue;
+                var dir = kv.Value.Position - pos;
+                var forward = self.Transform.forward;
+                var angle = Vector3.Angle(forward, dir);
+                if (angle < 120 && dir.magnitude < 1)
+                {
+                    return kv.Value;
+                }
+            }
+            return null;
+        }
+        public Unit GetAround(Vector3 pos,float distance,long selfid )
         {
             foreach(var kv in idUnits)
             {
+                if (kv.Value.UnitType == UnitType.Weak || kv.Value.Id == selfid)
+                    continue;
                 var dir = kv.Value.Position - pos;
                 if (dir.magnitude < distance)
                 {

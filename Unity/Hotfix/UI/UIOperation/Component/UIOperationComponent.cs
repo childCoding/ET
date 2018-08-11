@@ -32,22 +32,30 @@ namespace ETHotfix
         public Text WeakScore { get; set; }
         // 强势方积分
         public Text StrongScore { get; set; }
+
         GameObject spitButton = null;
 
+        GameObject shootButton = null;
+        GameObject getItemButton = null;
+        GameObject watchButton = null;
+        GameObject helpotherButton = null;
+        GameObject changeBodyButton = null;
         public void Awake()
         {
             ReferenceCollector rc = this.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
             GameObject pushBoxButton = rc.Get<GameObject>("NormalSkill");
             spitButton = rc.Get<GameObject>("NormalSkill0");
             this.spitButton.gameObject.SetActive(false);
-            GameObject changeBodyButton = rc.Get<GameObject>("NormalSkill1");
-            GameObject shootButton = rc.Get<GameObject>("NormalSkill2");
+            changeBodyButton = rc.Get<GameObject>("NormalSkill1");
+            shootButton = rc.Get<GameObject>("NormalSkill2");
             GameObject useItemButton = rc.Get<GameObject>("NormalSkill3");
-            GameObject watchButton = rc.Get<GameObject>("NormalSkill4");
-            GameObject getItemButton = rc.Get<GameObject>("NormalSkill5");
+            watchButton = rc.Get<GameObject>("NormalSkill4");
+            getItemButton = rc.Get<GameObject>("NormalSkill5");
+            helpotherButton = rc.Get<GameObject>("helpother");
+
             pushBoxButton.gameObject.SetActive(false);
             pushBoxButton.GetComponent<Button>().onClick.Add(this.pushBox);
-            changeBodyButton.gameObject.SetActive(false);
+            changeBodyButton.gameObject.SetActive(true);
             changeBodyButton.GetComponent<Button>().onClick.Add(this.changeBody);
             shootButton.gameObject.SetActive(false);
             shootButton.GetComponent<Button>().onClick.Add(this.shoot);
@@ -56,7 +64,9 @@ namespace ETHotfix
             watchButton.gameObject.SetActive(false);
             watchButton.GetComponent<Button>().onClick.Add(this.watch);
             getItemButton.gameObject.SetActive(false);
-            getItemButton.GetComponent<Button>().onClick.Add(this.getItem);
+            getItemButton.GetComponent<Button>().onClick.Add(this.dragcast);
+            helpotherButton.gameObject.SetActive(false);
+            helpotherButton.GetComponent<Button>().onClick.Add(this.helpother);
 
             joystick = rc.Get<GameObject>("Joystick").GetComponent<Joystick>();
             this.WeakScore = rc.Get<GameObject>("Weak").GetComponent<Text>();
@@ -70,6 +80,12 @@ namespace ETHotfix
             {
                 this.spitButton.gameObject.SetActive(true);
                 spitButton.GetComponent<Button>().onClick.Add(this.spit);
+
+                this.shootButton.gameObject.SetActive(true);
+            }
+            else
+            {
+                getItemButton.gameObject.SetActive(true);
             }
         }
         private bool IsStop = true;
@@ -82,6 +98,10 @@ namespace ETHotfix
             if (DetlaTime < 0.1f)
                 return;
             DetlaTime = 0;
+
+
+            long id = UnitComponent.Instance.nearDeathUnitId();
+            helpotherButton.gameObject.SetActive(id > 0);
 
             Vector3 moveVector = joystick.WorldDirection;// Vector3.right * joystick.Horizontal + Vector3.forward * joystick.Vertical;
             moveVector.y = 0;
@@ -134,12 +154,23 @@ namespace ETHotfix
         // 观察
         private void watch()
         {
-            ETModel.SessionComponent.Instance.Session.Send(new Frame_UnitSkillCastItem() { Index = 5 });
+            //ETModel.SessionComponent.Instance.Session.Send(new Frame_UnitSkillCastItem() { Index = 5 });
         }
         // 拾取道具
-        private void getItem()
+        private void dragcast()
         {
-            ETModel.SessionComponent.Instance.Session.Send(new Frame_UnitSkillCastItem() { Index = 6 });
+            MoveComponent moveComponent = Unit.GetComponent<MoveComponent>(); 
+            Unit other = UnitComponent.Instance.GetForwardUnit(Unit.Position, 0.2f, Unit);
+            //Unit other = UnitComponent.Instance.GetAround(Unit.Position, 0.2f, Unit.Id);
+            if ( other != null)
+            {
+                //moveComponent.Drag(other);
+                ETModel.SessionComponent.Instance.Session.Send(new Frame_UnitKickUnit() { OtherId = other.Id, Dir = Utility.ETVector3FromUnityVector3(Unit.Transform.forward) });
+            }            
+        }
+        private void helpother()
+        {
+            ETModel.SessionComponent.Instance.Session.Send(new Frame_UnitSkillCastItem() { Index = 1 });
         }
     }
 }

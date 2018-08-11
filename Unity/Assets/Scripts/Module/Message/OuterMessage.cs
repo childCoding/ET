@@ -1371,6 +1371,283 @@ namespace ETModel {
 
   }
 
+  public partial class Frame_UnitDragUnit : pb::IMessage {
+    private static readonly pb::MessageParser<Frame_UnitDragUnit> _parser = new pb::MessageParser<Frame_UnitDragUnit>(() => new Frame_UnitDragUnit());
+    public static pb::MessageParser<Frame_UnitDragUnit> Parser { get { return _parser; } }
+
+    private int rpcId_;
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    private long id_;
+    public long Id {
+      get { return id_; }
+      set {
+        id_ = value;
+      }
+    }
+
+    private long otherId_;
+    public long OtherId {
+      get { return otherId_; }
+      set {
+        otherId_ = value;
+      }
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (OtherId != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(OtherId);
+      }
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (Id != 0L) {
+        output.WriteRawTag(240, 5);
+        output.WriteInt64(Id);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (Id != 0L) {
+        size += 2 + pb::CodedOutputStream.ComputeInt64Size(Id);
+      }
+      if (OtherId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(OtherId);
+      }
+      return size;
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      otherId_ = 0;
+      rpcId_ = 0;
+      id_ = 0;
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            OtherId = input.ReadInt64();
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+          case 752: {
+            Id = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public partial class Frame_UnitKickUnit : pb::IMessage {
+    private static readonly pb::MessageParser<Frame_UnitKickUnit> _parser = new pb::MessageParser<Frame_UnitKickUnit>(() => new Frame_UnitKickUnit());
+    public static pb::MessageParser<Frame_UnitKickUnit> Parser { get { return _parser; } }
+
+    private int rpcId_;
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    private long id_;
+    public long Id {
+      get { return id_; }
+      set {
+        id_ = value;
+      }
+    }
+
+    private long otherId_;
+    public long OtherId {
+      get { return otherId_; }
+      set {
+        otherId_ = value;
+      }
+    }
+
+    private global::ETModel.vector3 dir_;
+    public global::ETModel.vector3 Dir {
+      get { return dir_; }
+      set {
+        dir_ = value;
+      }
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (OtherId != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(OtherId);
+      }
+      if (dir_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(Dir);
+      }
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (Id != 0L) {
+        output.WriteRawTag(240, 5);
+        output.WriteInt64(Id);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (Id != 0L) {
+        size += 2 + pb::CodedOutputStream.ComputeInt64Size(Id);
+      }
+      if (OtherId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(OtherId);
+      }
+      if (dir_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Dir);
+      }
+      return size;
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      otherId_ = 0;
+      rpcId_ = 0;
+      id_ = 0;
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            OtherId = input.ReadInt64();
+            break;
+          }
+          case 18: {
+            if (dir_ == null) {
+              dir_ = new global::ETModel.vector3();
+            }
+            input.ReadMessage(dir_);
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+          case 752: {
+            Id = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  public partial class Frame_UnitReliveUnit : pb::IMessage {
+    private static readonly pb::MessageParser<Frame_UnitReliveUnit> _parser = new pb::MessageParser<Frame_UnitReliveUnit>(() => new Frame_UnitReliveUnit());
+    public static pb::MessageParser<Frame_UnitReliveUnit> Parser { get { return _parser; } }
+
+    private int rpcId_;
+    public int RpcId {
+      get { return rpcId_; }
+      set {
+        rpcId_ = value;
+      }
+    }
+
+    private long id_;
+    public long Id {
+      get { return id_; }
+      set {
+        id_ = value;
+      }
+    }
+
+    private long otherId_;
+    public long OtherId {
+      get { return otherId_; }
+      set {
+        otherId_ = value;
+      }
+    }
+
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (OtherId != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(OtherId);
+      }
+      if (RpcId != 0) {
+        output.WriteRawTag(208, 5);
+        output.WriteInt32(RpcId);
+      }
+      if (Id != 0L) {
+        output.WriteRawTag(240, 5);
+        output.WriteInt64(Id);
+      }
+    }
+
+    public int CalculateSize() {
+      int size = 0;
+      if (RpcId != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(RpcId);
+      }
+      if (Id != 0L) {
+        size += 2 + pb::CodedOutputStream.ComputeInt64Size(Id);
+      }
+      if (OtherId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(OtherId);
+      }
+      return size;
+    }
+
+    public void MergeFrom(pb::CodedInputStream input) {
+      otherId_ = 0;
+      rpcId_ = 0;
+      id_ = 0;
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            OtherId = input.ReadInt64();
+            break;
+          }
+          case 720: {
+            RpcId = input.ReadInt32();
+            break;
+          }
+          case 752: {
+            Id = input.ReadInt64();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public partial class C2R_Ping : pb::IMessage {
     private static readonly pb::MessageParser<C2R_Ping> _parser = new pb::MessageParser<C2R_Ping>(() => new C2R_Ping());
     public static pb::MessageParser<C2R_Ping> Parser { get { return _parser; } }

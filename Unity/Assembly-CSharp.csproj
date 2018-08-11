@@ -167,6 +167,7 @@
     <Compile Include="Assets\Scripts\Module\FrameSync\ClientFrameComponent.cs" />
     <Compile Include="Assets\Scripts\Module\FrameSync\FrameMessage.cs" />
     <Compile Include="Assets\Scripts\Module\FrameSync\FrameOpcode.cs" />
+    <Compile Include="Assets\Scripts\Module\FrameSync\HelpComponent.cs" />
     <Compile Include="Assets\Scripts\Module\FrameSync\Item.cs" />
     <Compile Include="Assets\Scripts\Module\FrameSync\ItemComponent.cs" />
     <Compile Include="Assets\Scripts\Module\FrameSync\ItemFactory.cs" />
