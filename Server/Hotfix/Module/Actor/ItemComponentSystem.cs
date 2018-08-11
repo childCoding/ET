@@ -23,7 +23,7 @@ namespace ETHotfix
         {
             while (true)
             {
-                int number = RandomHelper.RandomNumber(2, 3);
+                int number = RandomHelper.RandomNumber(0, 1);
                 await Game.Scene.GetComponent<TimerComponent>().WaitAsync(number * 1000);
                 IConfig[] scoreConfigs = Game.Scene.GetComponent<ConfigComponent>().GetAll(typeof(ScoreConfig));
                 number = RandomHelper.RandomNumber(0, scoreConfigs.Length);
@@ -32,7 +32,7 @@ namespace ETHotfix
                 {
                     Item newItem = ComponentFactory.CreateWithId<Item>(scoreConfig.Id);
                     newItem.IsShow = true;
-                    newItem.Position = new Vector3(scoreConfig.X, scoreConfig.Y, scoreConfig.Z);
+                    newItem.Position = new Vector3((float)scoreConfig.X, (float)scoreConfig.Y, (float)scoreConfig.Z);
                     self.Add(newItem);
                 }
                 Actor_CreateItems actorCreateItems = new Actor_CreateItems();
