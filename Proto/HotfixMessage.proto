@@ -1,6 +1,5 @@
 syntax = "proto3";
 package ETHotfix;
-import "Common.proto";
 
 message C2R_Login // IRequest
 {

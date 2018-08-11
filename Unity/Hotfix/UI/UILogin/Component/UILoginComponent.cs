@@ -19,7 +19,6 @@ namespace ETHotfix
 	{
 		private InputField account;
 		private GameObject loginBtn;
-        private GameObject resetBgn;
 
 		public void Awake()
 		{
@@ -55,6 +54,7 @@ namespace ETHotfix
 				Log.Info($"登陆gate成功!玩家编号{g2CLoginGate.PlayerId}");
 				// 创建Player
 				Player player = ETModel.ComponentFactory.CreateWithId<Player>(g2CLoginGate.PlayerId);
+                player.Account = this.account.text;
 				PlayerComponent playerComponent = ETModel.Game.Scene.GetComponent<PlayerComponent>();
                 playerComponent.MyPlayer = player;
 

@@ -23,7 +23,7 @@ namespace ETHotfix
                 Log.Debug($"unitid:{unitInfo.UnitId} create");
                 Unit unit = UnitFactory.Create(unitInfo.UnitId, (UnitType)unitInfo.Type);
                 unit.PlayerId = unitInfo.PlayerId;
-                unit.Position = new Vector3(unitInfo.X / 1000f, 0, unitInfo.Z / 1000f);
+                unit.Position = new Vector3(unitInfo.X / 1000f, 0.5f, unitInfo.Z / 1000f);
                 unit.IntPos = new VInt3(unitInfo.X, 0, unitInfo.Z);
                 if (PlayerComponent.Instance.MyPlayer.Id == unit.PlayerId)
                 {
