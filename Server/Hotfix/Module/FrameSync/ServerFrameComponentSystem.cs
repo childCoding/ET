@@ -43,6 +43,11 @@ namespace ETHotfix
                 {
                     itemComponent.GetScore();
                 }
+                UnitComponent unitComponent = Game.Scene.GetComponent<UnitComponent>();
+                if (unitComponent != null)
+                {
+                    unitComponent.GetScore();
+                }
             }
         }
 

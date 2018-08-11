@@ -21,7 +21,6 @@ namespace ETHotfix
 				response.UnitId = createUnit.UnitId;
 				response.Count = createUnit.Count;
 				reply(response);
-                Game.Scene.AddComponent<ItemComponent>();
             }
             catch (Exception e)
 			{

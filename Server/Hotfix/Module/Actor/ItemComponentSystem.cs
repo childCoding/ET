@@ -21,17 +21,20 @@ namespace ETHotfix
 
         private static async void update(this ItemComponent self)
         {
-            return;
-            //while (true)
+            while (true)
             {
-                int number = RandomHelper.RandomNumber(0, 1);
+                int number = RandomHelper.RandomNumber(2, 3);
                 await Game.Scene.GetComponent<TimerComponent>().WaitAsync(number * 1000);
-                Item newItem = ComponentFactory.Create<Item>();
-                ScoreConfig scoreConfig = (ScoreConfig)Game.Scene.GetComponent<ConfigComponent>().Get(typeof(ScoreConfig), 1);
-                newItem.ConfigId = scoreConfig.Id;
-                newItem.IsShow = true;
-                newItem.Position = new Vector3(RandomHelper.RandomNumber(scoreConfig.MinX, scoreConfig.MaxX), scoreConfig.Y, RandomHelper.RandomNumber(scoreConfig.MinZ, scoreConfig.MaxZ));
-                self.Add(newItem);
+                IConfig[] scoreConfigs = Game.Scene.GetComponent<ConfigComponent>().GetAll(typeof(ScoreConfig));
+                number = RandomHelper.RandomNumber(0, scoreConfigs.Length);
+                ScoreConfig scoreConfig = scoreConfigs[number] as ScoreConfig;
+                if (Game.Scene.GetComponent<ItemComponent>().Get(scoreConfigs[number].Id) == null)
+                {
+                    Item newItem = ComponentFactory.CreateWithId<Item>(scoreConfig.Id);
+                    newItem.IsShow = true;
+                    newItem.Position = new Vector3(scoreConfig.X, scoreConfig.Y, scoreConfig.Z);
+                    self.Add(newItem);
+                }
                 Actor_CreateItems actorCreateItems = new Actor_CreateItems();
                 Item[] items = self.GetAll();
                 foreach (Item item in items)
@@ -44,7 +47,6 @@ namespace ETHotfix
 
         public static void GetScore(this ItemComponent self)
         {
-            return;
             Item[] itemds = self.GetAll();
             Actor_RemoveItems actorRemoveItems = new Actor_RemoveItems();
             foreach (Item item in itemds)
@@ -53,7 +55,7 @@ namespace ETHotfix
                 foreach (Unit unit in units)
                 {
                     Vector3 vector = unit.Position - item.Position;
-                    if (vector.Length() < 1)
+                    if (vector.Length() < 1 && unit.UnitType == UnitType.Weak)
                     {
                         unit.Score++;
                         actorRemoveItems.Id.Add(item.Id);
@@ -65,6 +67,7 @@ namespace ETHotfix
             if (actorRemoveItems.Id.Count > 0)
             {
                 MessageHelper.Broadcast(actorRemoveItems);
+                Game.Scene.GetComponent<UnitComponent>().SendMatchInformation();
             }
         }
     }

@@ -5,6 +5,8 @@ namespace ETModel
 {
 	public class UnitComponent: Component
 	{
+        public long GetScoreTime { get; set; }
+
 		private readonly Dictionary<long, Unit> idUnits = new Dictionary<long, Unit>();
 
 		public override void Dispose()
