@@ -76,7 +76,7 @@ namespace ETHotfix
         private float DetlaTime;
         public void Update()
         {
-            if (MoveC != null && MoveC.IsByDrag)
+            if (MoveC != null && !MoveC.CanControl)
                 return;
             DetlaTime += Time.deltaTime;
             if (DetlaTime < 0.1f)

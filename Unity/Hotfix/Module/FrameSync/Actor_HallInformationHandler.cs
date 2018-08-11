@@ -12,7 +12,7 @@ namespace ETHotfix
 
             for(int i = 0;i < 5;i++)
             {
-                uILobbyComponent.InitPlayer(i, 0, "");
+                uILobbyComponent.InitPlayer(i, 0,string.Empty);
             }
             foreach (PlayerChooseType playerChooseType in message.PlayerChooseType)
             {

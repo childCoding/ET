@@ -12,7 +12,7 @@ namespace ETHotfix
             MoveComponent moveComponent = unit.GetComponent<MoveComponent>();
             Vector3 dir = ETModel.Utility.UnityVector3FromETVector3(message.Dir);
             Vector3 dest = unit.Position + dir * 5;
-            moveComponent.Turn2D(dir);
+            
             moveComponent.MoveToDir(dir);
         }
     }

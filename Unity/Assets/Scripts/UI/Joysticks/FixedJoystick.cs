@@ -50,7 +50,8 @@ public class FixedJoystick : Joystick
         {
             inputVector.y = -1;
         }
-        else if (Input.GetKey(KeyCode.A))
+
+        if (Input.GetKey(KeyCode.A))
         {
             inputVector.x = -1;
         }
@@ -60,7 +61,7 @@ public class FixedJoystick : Joystick
         }
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            //move
+            Game.Scene.GetComponent<UnitComponent>().MyUnit.GetComponent<MoveComponent>().Jump();
         }
         WorldDirection = mainCamera.cameraToWorldMatrix.MultiplyVector(new Vector3(inputVector.x, 0, -inputVector.y));
     }

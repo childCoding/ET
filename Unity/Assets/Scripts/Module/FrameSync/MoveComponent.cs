@@ -39,13 +39,35 @@ namespace ETModel
 
 	public class MoveComponent : Component
 	{
-        private enum State { Moving ,Idle,ByDrag, ByCasting }
-        private State UnitState = State.Idle;
+        //private enum State { Moving ,Idle,ByDrag, ByCasting }
+        //private State UnitState = State.Idle;
 		private AnimatorComponent animatorComponent;
         private CharacterController characterComponent;
 
-		public long mainSpeed;
-		public Dictionary<long, Speed> speeds = new Dictionary<long, Speed>();
+        public bool CanControl = true;
+
+        public bool JumpTrigger = false;
+        public bool DashTrigger = false;
+
+        public float Gravity = -0.5f;
+        public float JumpSpeed = 0.2f;
+        public float MoveSpeed = 2.0f;
+
+        public float DashMoveSpeed = 8.0f;
+        public float DashMoveAnimationSpeed = 4.0f;
+        public float DashMoveDurationTime = 3.0f;
+        public Vector3 Direction { get { return this.GetParent<Unit>().Transform.forward; } }
+        public Vector3 Position = Vector3.zero;
+        public Vector3 Dest = Vector3.zero;
+
+        public bool IsNeedMove()
+        {
+            if ((Dest - Position).magnitude > 0.1f)
+                return true;
+            return false;
+        }
+
+        public long mainSpeed;
 
 		// turn
 		public Quaternion To;
@@ -55,9 +77,23 @@ namespace ETModel
 
 		public bool IsArrived { get; private set; } = true;
 
-
-		public bool hasDest;
-		public Vector3 Dest;
+        public bool IsOnGround()
+        {
+            return characterComponent.isGrounded;
+        }
+        public void PlayAnimation(string name,float normalizeTime = 0.1f)
+        {
+            animatorComponent?.Animator.Play(name, 0, normalizeTime);
+        }
+        public void SetAnimationSpeed(float v)
+        {
+            if (animatorComponent != null)
+            {
+                animatorComponent.Animator.speed = v;
+            }  
+        }
+        public bool hasDest;
+		//public Vector3 Dest;
 
 		public Vector3 MainSpeed
 		{
@@ -77,28 +113,25 @@ namespace ETModel
 
 		public void Awake()
 		{ 
-			this.mainSpeed = this.AddSpeed(new Vector3());
+
 			this.animatorComponent = this.Entity.GetComponent<AnimatorComponent>();
             this.characterComponent = this.GetParent<Unit>().GameObject.GetComponent<CharacterController>();
 
         }
+        private Vector3 motion = Vector3.zero;
+        public void SetMotion(float x,float z) { motion.x = x;motion.z = z; }
+        public void SetMotion(float y) { motion.y = y; }
+        public void SetMotion(Vector3 m) { motion = m; }
 
 		public void Update()
 		{
-			UpdateTurn();
 
+            //JumpTrigger = false;
+            //DashTrigger = false;
 
-			Unit unit = this.GetParent<Unit>();
-			Vector3 moveVector3 = this.MainSpeed * Time.deltaTime;
+            UpdateTurn();
 
-            moveVector3 += animatorComponent.Animator ? animatorComponent.Animator.deltaPosition:Vector3.zero;
-            if (!characterComponent.isGrounded)
-            {
-                moveVector3.y += -0.5f;
-            }
-            //unit.Position = unit.Position + moveVector3;
-            if(moveVector3.magnitude > 0.001f)
-                characterComponent.Move(moveVector3);
+            characterComponent.Move(motion);
 
         }
         #region 移动
@@ -130,54 +163,45 @@ namespace ETModel
 			this.MainSpeed = speed;
 			this.Dest = dest;
 
-            UnitState = State.Moving;
+            //UnitState = State.Moving;
         }
 
 		public void MoveToDir(Vector3 dir)
 		{
-			this.IsArrived = false;
+            Turn2D(dir);
+            Dest = Position + dir * 5f;
+
+            this.IsArrived = false;
 			this.hasDest = false;
 			this.MainSpeed = dir;
-            UnitState = State.Moving;
+            //UnitState = State.Moving;
         }
 
-		public long AddSpeed(Vector3 spd)
-		{
-			Speed speed = new Speed() { Value = spd };
-			this.speeds.Add(speed.Id, speed);
-			return speed.Id;
-		}
-
-		public Vector3 GetSpeed(long id)
-		{
-			return m_Speed;
-		}
-
-		public void RemoveSpeed(long id)
-		{
-
-		}
 
 		/// <summary>
 		/// 停止移动Unit,只停止地面正常移动,不停止击飞等移动
 		/// </summary>
 		public void Stop()
 		{
+            Dest = Position;
+
 			this.m_Speed = Vector3.zero;
 			this.animatorComponent?.SetFloatValue("Speed", 0);
             //this.animatorComponent?.Play(MotionType.Idle);
-            UnitState = State.Idle;
+            //UnitState = State.Idle;
         }
         /// <summary>
         /// 停止移动Unit,只停止地面正常移动,不停止击飞等移动
         /// </summary>
         public void Jump()
         {
-            MainSpeed += Vector3.up * 20;
-            //this.speeds.Clear();
-            //this.animatorComponent?.SetFloatValue("Speed", 0);
-            //this.animatorComponent?.Play(MotionType.Idle);
-            //UnitState = State.Moving;
+            JumpTrigger = true;
+        }
+
+        public void DashMove()
+        {
+            DashTrigger = true;
+            Dest = Position + Direction * 2;
         }
         /// <summary>
         /// 改变Unit的朝向
@@ -273,7 +297,7 @@ namespace ETModel
             }
         }
         //private 
-        public bool IsByDrag { get { return UnitState == State.ByDrag; } }
+        //public bool IsByDrag { get { return UnitState == State.ByDrag; } }
         #endregion
     }
 }

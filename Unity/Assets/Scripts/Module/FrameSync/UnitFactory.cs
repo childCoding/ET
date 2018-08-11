@@ -20,6 +20,7 @@ namespace ETModel
             unit.AddComponent<AnimatorComponent>();
             unit.AddComponent<MoveComponent>();
             unit.AddComponent<BoneComponent>();
+            unit.AddComponent<StateMachineComponent>();
             Game.Scene.GetComponent<UnitComponent>().Add(unit);
             InitColor(unit.GameObject,GetColor(unitType));
             return unit;
