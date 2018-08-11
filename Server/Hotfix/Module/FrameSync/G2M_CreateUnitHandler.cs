@@ -11,7 +11,7 @@ namespace ETHotfix
             M2G_CreateUnit response = new M2G_CreateUnit();
             try
             {
-                Unit unit = ComponentFactory.Create<Unit,UnitType>(UnitType.Weak);
+                Unit unit = ComponentFactory.Create<Unit,UnitType>(session.GetComponent<SessionPlayerComponent>().Player.UnitType);
                 unit.PlayerId = message.PlayerId;
                 await unit.AddComponent<MailBoxComponent>().AddLocation();
                 unit.AddComponent<UnitGateComponent, long>(message.GateSessionId);

@@ -102,9 +102,7 @@ namespace ETHotfix
 
         private void ChooseUnitType(int type)
         {
-            C2G_ChooseType chooseType = new C2G_ChooseType();
-            chooseType.Type = type;
-            ETModel.SessionComponent.Instance.Session.Send(chooseType);
+            ETModel.SessionComponent.Instance.Session.Send(new C2G_ChooseType() { Type = type });
         }
 
     }
