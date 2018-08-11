@@ -56,5 +56,5 @@ MonoBehaviour:
     gameObject: {fileID: 1095546210275710, guid: 534aa54081aeefe43ae01a61747d15c6,
       type: 2}
   - key: Hero
-    gameObject: {fileID: 1563626372519952, guid: 38931fb8292ec8641b1c7f345ac7e874,
+    gameObject: {fileID: 1845539017613940, guid: 38931fb8292ec8641b1c7f345ac7e874,
       type: 2}
