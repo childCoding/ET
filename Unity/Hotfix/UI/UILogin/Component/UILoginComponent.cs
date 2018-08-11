@@ -17,15 +17,17 @@ namespace ETHotfix
 	
 	public class UILoginComponent: Component
 	{
-		private GameObject account;
+		private InputField account;
 		private GameObject loginBtn;
+        private GameObject resetBgn;
 
 		public void Awake()
 		{
 			ReferenceCollector rc = this.GetParent<UI>().GameObject.GetComponent<ReferenceCollector>();
             loginBtn = rc.Get<GameObject>("LoginBtn");
 			loginBtn.GetComponent<Button>().onClick.Add(OnLogin);
-			this.account = rc.Get<GameObject>("Account");
+			this.account = rc.Get<GameObject>("Account").GetComponent<InputField>();
+            rc.Get<GameObject>("ResetBtn").GetComponent<Button>().onClick.Add(this.OnReset);
         }
 
 		public async void OnLogin()
@@ -33,14 +35,11 @@ namespace ETHotfix
 			try
 			{
 				IPEndPoint connetEndPoint = NetworkHelper.ToIPEndPoint(GlobalConfigComponent.Instance.GlobalProto.Address);
-
-				string text = this.account.GetComponent<InputField>().text;
-
 				// 创建一个ETModel层的Session
 				ETModel.Session session = ETModel.Game.Scene.GetComponent<NetOuterComponent>().Create(connetEndPoint);
 				// 创建一个ETHotfix层的Session, ETHotfix的Session会通过ETModel层的Session发送消息
 				Session realmSession = ComponentFactory.Create<Session, ETModel.Session>(session);
-				R2C_Login r2CLogin = (R2C_Login) await realmSession.Call(new C2R_Login() { Account = text, Password = "111111" });
+				R2C_Login r2CLogin = (R2C_Login) await realmSession.Call(new C2R_Login() { Account = this.account.text, Password = "111111" });
 				realmSession.Dispose();
 
 				connetEndPoint = NetworkHelper.ToIPEndPoint(r2CLogin.Address);
@@ -67,5 +66,10 @@ namespace ETHotfix
 				Log.Error(e);
 			}
 		}
+
+        private void OnReset()
+        {
+            this.account.text = "";
+        }
 	}
 }
