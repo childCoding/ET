@@ -53,9 +53,11 @@ namespace ETModel
         public bool JumpTrigger = false;
         public bool DashTrigger = false;
 
+        public float MoveSpeed { get { return this.GetParent<Unit>().UnitType == UnitType.Weak ? WeakMoveSpeed : StrongMoveSpeed; } }
         public float Gravity = -0.5f;
-        public float JumpSpeed = 0.1f;
-        public float MoveSpeed = 2.0f;
+        public float JumpSpeed = 0.2f;
+        public float WeakMoveSpeed = 5.0f;
+        public float StrongMoveSpeed = 4.0f;
 
         public float DashMoveSpeed = 8.0f;
         public float DashMoveAnimationSpeed = 4.0f;
