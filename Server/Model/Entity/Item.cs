@@ -5,7 +5,7 @@ namespace ETModel
 {
     public sealed class Item: Entity
 	{
-        public bool IsShow { get; set; } = true;
+        public bool CanGet { get; set; }
 		[BsonIgnore]
 		public Vector3 Position { get; set; }
         // 归属
